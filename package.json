@@ -1,0 +1,22 @@
+{
+  "name": "json-schema-to-reason",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jsiebern/json-schema-to-reason.git",
+  "author": "Jonathan Siebern <jsiebern88@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel public/index.html -p 8080",
+    "clean": "bsb -clean-world",
+    "bsb": "bsb -make-world"
+  },
+  "dependencies": {
+    "bs-decode": "^0.3.3",
+    "bs-platform": "^4.0.7",
+    "parcel-bundler": "^1.10.3",
+    "reason-react": "^0.5.3"
+  },
+  "devDependencies": {
+    "bsb-js": "^1.1.7"
+  }
+}

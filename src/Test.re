@@ -1,0 +1,1 @@
+let json: Js.Json.t = [%bs.raw {|require('./test.json')|}];
