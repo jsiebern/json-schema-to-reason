@@ -21,7 +21,9 @@ and jsonSchema = {
   properties: option(jsonDefinitions),
   default: option(string),
 }
-and jsonArray = {items: array(jsonType)}
+and jsonRef = string
+and jsonArray = {items: jsonType}
+and jsonUnionArray = {items: array(jsonType)}
 and jsonObject = {
   required: option(array(string)),
   properties: jsonDefinitions,
@@ -35,6 +37,7 @@ and jsonType =
   | Bool
   | Object(jsonObject)
   | Array(jsonArray)
+  | UnionArray(jsonUnionArray)
   | Null
   | Ref(string)
   | Union(array(jsonType))
@@ -46,21 +49,6 @@ and jsonType =
   | Not(jsonType);
 
 module D = Decode.AsOption;
-
-module Make = {
-  let jsonSchema = (schema, id, title, definitions, properties, default) => {
-    schema,
-    id,
-    title,
-    definitions,
-    properties,
-    default,
-  };
-
-  let jsonArray = items => {items: items};
-
-  let jsonObject = (required, properties) => {required, properties};
-};
 
 let rec decodeDefinitions = json =>
   switch (json |> Js.Json.decodeObject) {
@@ -78,33 +66,34 @@ let rec decodeDefinitions = json =>
   | None => None
   }
 and decodeJsonObject = json =>
-  Some(
-    D.Pipeline.(
-      succeed(Make.jsonObject)
-      |> optionalField("required", D.array(D.string))
-      |> field("properties", decodeDefinitions)
-      |> run(json)
-    )
-    ->Belt.Option.getWithDefault({
-        required: None,
-        properties: Belt.Map.String.empty,
-      }),
-  )
+  Some({
+    required: json |> D.field("required", D.array(D.string)),
+    properties:
+      (json |> D.field("properties", decodeDefinitions))
+      ->Belt.Option.getWithDefault(Belt.Map.String.empty),
+  })
 and decodeJsonSchema = json =>
-  D.Pipeline.(
-    succeed(Make.jsonSchema)
-    |> field("schema", D.string)
-    |> field("id", D.(optional(string)))
-    |> field("title", D.(optional(string)))
-    |> field("definitions", D.optional(decodeDefinitions))
-    |> field("properties", D.optional(decodeDefinitions))
-    |> field("default", D.(optional(string)))
-    |> run(json)
-  )
+  switch (json |> D.field("$schema", D.string)) {
+  | Some(schema) =>
+    Some({
+      schema,
+      id: json |> D.field("id", D.(string)),
+      title: json |> D.field("title", D.(string)),
+      default: json |> D.field("default", D.(string)),
+      definitions: json |> D.field("definitions", decodeDefinitions),
+      properties: json |> D.field("properties", decodeDefinitions),
+    })
+  | None => None
+  }
 and decodeJsonArray = json =>
-  Make.jsonArray(
-    (json |> D.array(decodeJsonType))->Belt.Option.getWithDefault([||]),
-  )
+  switch (
+    json |> D.field("items", decodeJsonType),
+    json |> D.field("items", D.array(decodeJsonType)),
+  ) {
+  | (Some(t), _) => Some(Array({items: t}))
+  | (_, Some(aT)) => Some(UnionArray({items: aT}))
+  | _ => None
+  }
 and decodeMixedEnum = json =>
   switch (json |> D.string, json |> D.int, json |> D.float, json |> D.boolean) {
   | (Some(str), _, _, _) => Some(`String(str))
@@ -135,7 +124,7 @@ and decodeJsonType = json =>
       | None => Some(String)
       | Some(strEnum) => Some(StringEnum(strEnum))
       }
-    | "array" => Some(Array(json |> decodeJsonArray))
+    | "array" => json |> decodeJsonArray
     | "object" => (json |> decodeJsonObject)->Belt.Option.map(o => Object(o))
     | _ => None
     }
@@ -169,8 +158,8 @@ and decodeJsonType = json =>
         switch (json |> D.field("enum", D.array(decodeMixedEnum))) {
         | Some(mixedArray) => Some(MixedEnum(mixedArray))
         | None =>
-          Js.log2("ERROR", json);
-          None;
+          /* Js.log2("NOT_FOUND", json); */
+          None
         }
       }
     }
