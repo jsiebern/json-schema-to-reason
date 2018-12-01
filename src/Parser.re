@@ -162,6 +162,19 @@ let parse =
           {j|[@bs.as "$name"] $rName: $rType|j}
         )
       ->Js.Array.joinWith(",\n", _);
+
+    let genericObjectSplit = sProperties->Js.String.split("{..}");
+
+    let sProperties =
+      genericObjectSplit->Belt.Array.size > 1 ?
+        genericObjectSplit
+        ->Belt.Array.mapWithIndex((i, str) =>
+            i mod 2 === 0 ?
+              str : str ++ "'" ++ String.make(1, (i - 1)->char_of_int)
+          )
+        ->Js.Array.join :
+        sProperties;
+
     {j|
       $typesBefore
 

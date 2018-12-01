@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel public/index.html -p 8080",
+    "start-ts": "parcel public/index_ts.html -p 8080",
     "clean": "bsb -clean-world",
     "bsb": "bsb -make-world"
   },
@@ -17,6 +18,9 @@
     "reason-react": "^0.5.3"
   },
   "devDependencies": {
-    "bsb-js": "^1.1.7"
+    "@types/json-schema": "^7.0.1",
+    "bsb-js": "^1.1.7",
+    "reason": "^3.3.4",
+    "typescript": "^3.2.1"
   }
 }
