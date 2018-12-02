@@ -1,6 +1,8 @@
 import BaseParser from './_base';
 import getParser from './_getParser';
 
+let i = 0;
+
 class ObjectParser extends BaseParser {
     private properties: BaseParser[] = [];
 
@@ -21,6 +23,10 @@ class ObjectParser extends BaseParser {
             if (!parser) {
                 return;
             }
+            i = i + 1;
+            if (i > 10000) {
+                throw 'FUCK';
+            }
             this.properties.push(new parser(this.schema, key, properties[key]));
         });
         this.properties.forEach(p => p.parse());
@@ -36,7 +42,12 @@ class ObjectParser extends BaseParser {
     }
 
     public getReasonType() {
-        return `${this.key}.t`;
+        if (this.properties.length) {
+            return `${this.key}.t`;
+        }
+        else {
+            return 'Js.t({..})';
+        }
     }
 
 }

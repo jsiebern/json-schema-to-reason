@@ -1,9 +1,22 @@
 import { JSONSchema7Definition } from 'json-schema';
 import SchemaParser from './schema';
 
-abstract class BaseParser {
-    protected readonly schema: SchemaParser;
-    protected readonly def: JSONSchema7Definition;
+export interface Parser {
+    readonly schema: SchemaParser;
+    readonly def: JSONSchema7Definition;
+    readonly key: string;
+
+    parse(): void;
+    getReasonType(): string;
+}
+
+export interface ParserConstructable {
+    new(schema: SchemaParser, key: string, def: JSONSchema7Definition): Parser;
+}
+
+abstract class BaseParser implements Parser {
+    public readonly schema: SchemaParser;
+    public readonly def: JSONSchema7Definition;
     public readonly key: string;
 
     public constructor(schema: SchemaParser, key: string, def: JSONSchema7Definition) {
