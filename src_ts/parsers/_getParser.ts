@@ -8,6 +8,9 @@ import StringParser from './parser.string';
 import FloatParser from './parser.float';
 import IntParser from './parser.int';
 import BoolParser from './parser.bool';
+import ArrayParser from './parser.array';
+import AllOfParser from './parser.allOf';
+import UnionParser from './parser.union';
 
 const getParser = (schema: Schema, def: JSONSchema7Definition): false | ParserConstructable => {
     if (typeof def !== 'boolean') {
@@ -27,12 +30,21 @@ const getParser = (schema: Schema, def: JSONSchema7Definition): false | ParserCo
             else if (def.type === 'string') {
                 return StringParser;
             }
+            else if (def.type === 'array') {
+                return ArrayParser;
+            }
+            else if (Array.isArray(def.type)) {
+                return UnionParser;
+            }
         }
         else if (def.$ref != null) {
             return RefParser;
         }
+        else if (def.allOf != null) {
+            return AllOfParser;
+        }
     }
-    console.log('NO_PARSER', def);
+    console.warn('NO_PARSER', def);
     return false;
 };
 

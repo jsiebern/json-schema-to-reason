@@ -8,6 +8,7 @@ export interface Parser {
 
     parse(): void;
     getReasonType(): string;
+    render(): string;
 }
 
 export interface ParserConstructable {
@@ -28,6 +29,8 @@ abstract class BaseParser implements Parser {
     public abstract parse(): void;
 
     public abstract getReasonType(): string;
+
+    public abstract render(): string;
 }
 
 export default BaseParser;

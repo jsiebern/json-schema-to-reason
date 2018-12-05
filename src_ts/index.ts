@@ -1,3 +1,5 @@
+// @ts-ignore
+import { parseRE, printRE } from 'reason';
 import { JSONSchema7 } from 'json-schema';
 import SchemaParser from './parsers/schema';
 
@@ -25,5 +27,9 @@ import SchemaParser from './parsers/schema';
         e.parse();
     }
 
-    console.log(parser.modules);
+    const reason = Object.keys(parser.modules).map(name => {
+        return parser.moduleParsers[name].render();
+    }).join('\n');
+
+    console.log(printRE(parseRE(reason)));
 })();

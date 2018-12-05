@@ -1,12 +1,18 @@
 import BaseParser from './_base';
 import getParser from './_getParser';
 
+import { generateModuleName, generateAttributeName } from '../helpers';
+
 let i = 0;
 
 class ObjectParser extends BaseParser {
     private properties: BaseParser[] = [];
+    private moduleName: string;
+    private module: moduleDefinition;
 
     public parse() {
+        this.moduleName = generateModuleName(this.key);
+
         if (typeof this.def === 'boolean') {
             return;
         }
@@ -30,26 +36,60 @@ class ObjectParser extends BaseParser {
             this.properties.push(new parser(this.schema, key, properties[key]));
         });
         this.properties.forEach(p => p.parse());
+        const required = this.def.required ? this.def.required : [];
 
-        this.schema.modules[this.key] = {
-            name: this.key,
+        this.module = this.schema.modules[this.moduleName] = {
+            name: this.moduleName,
             properties: this.properties.map(property => ({
                 name: property.key,
-                optional: false,
+                optional: required.includes(property.key),
                 reasonType: property.getReasonType(),
             }))
         };
+        this.schema.moduleParsers[this.moduleName] = this;
     }
 
     public getReasonType() {
         if (this.properties.length) {
-            return `${this.key}.t`;
+            const genericObjects = this.module.properties.filter(p => p.reasonType === 'Js.t({..})').map(p => `'${generateAttributeName(p.name)}`).join(',');
+            return `${this.moduleName}.t${genericObjects ? `(${genericObjects})` : ''}`;
         }
         else {
             return 'Js.t({..})';
         }
     }
 
+    public render() {
+        const genericObjectProperties = [
+            ...this.module.properties.filter(p => p.reasonType === 'Js.t({..})').map(p => `'${generateAttributeName(p.name)}`),
+            ...this.module.properties.filter(p => p.reasonType.includes('.t(') && !p.reasonType.includes('{..}')).reduce((prev, p) => {
+                const re = /.*\.t\((.*)\)/m;
+                const match = re.exec(p.reasonType);
+                if (match) {
+                    const parts = match[1].split(',');
+                    return [...prev, ...parts];
+                }
+                return prev;
+            }, [])
+        ];
+        const genericObjects = genericObjectProperties.join(',');
+
+        return `
+            module ${this.moduleName} {
+                [@bs.deriving abstract]
+                type t${genericObjects ? `(${genericObjects})` : ''} = {
+                    ${this.module.properties.map(property => {
+                const attributeName = generateAttributeName(property.name);
+                return `
+                            ${property.optional ? '[@bs.optional]' : ''}
+                            [@bs.as "${property.name}"]
+                            ${attributeName}: ${property.reasonType.replace('Js.t({..})', `Js.t('${attributeName})`)},
+                        `;
+            }).join('\n')}
+                };
+            }
+        `;
+    }
 }
 
 export default ObjectParser;

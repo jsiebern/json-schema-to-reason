@@ -1,5 +1,6 @@
 import { JSONSchema7, JSONSchema7Definition } from 'json-schema';
 import getParser from './_getParser';
+import { Parser } from './_base';
 
 type options = {
     replaceRefs?: {
@@ -15,6 +16,8 @@ class SchemaParser {
     private readonly _options: options;
 
     public modules: { [name: string]: moduleDefinition } = {};
+    public moduleParsers: { [name: string]: Parser } = {};
+
 
     public hasModule = (name: string) => typeof this.modules[name] !== 'undefined';
 
