@@ -12,7 +12,7 @@ declare module '@jsiebern/json-schema-to-reason' {
         }[],
     };
 
-    type exp = (jsonString: string, extractType: string, options: options) => expDef;
+    let exp: (jsonString: string, extractType: string, options: options) => expDef;
 
     export default exp;
 }

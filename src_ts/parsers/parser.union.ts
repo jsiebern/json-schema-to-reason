@@ -1,26 +1,9 @@
-import BaseParser, { Parser } from './_base';
+import BaseParser from './_base';
 
-import { capitalize, generateAttributeName } from '../helpers';
-import getParser from './_getParser';
+import { generateAttributeName } from '../helpers';
 
 class UnionParser extends BaseParser {
-    private types: (Parser | false)[];
-
     public parse(): void {
-        if (typeof this.def === 'boolean') {
-            return;
-        }
-        if (!Array.isArray(this.def.type)) {
-            return;
-        }
-
-        this.types = this.def.type.map(t => {
-            const parser = getParser(this.schema, { type: t });
-            if (typeof parser !== 'boolean') {
-                return new parser(this.schema, "", { type: t });
-            }
-            return false;
-        }).filter(p => typeof p !== 'boolean');
     }
     public getReasonType(): string {
         return 'string';

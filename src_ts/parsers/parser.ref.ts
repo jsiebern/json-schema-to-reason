@@ -53,6 +53,10 @@ class RefParser extends BaseParser {
         }
         return this.parser.getReasonType();
     }
+
+    public render() {
+        return '';
+    }
 }
 
 export default RefParser;

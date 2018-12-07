@@ -7,6 +7,10 @@ class IntParser extends BaseParser {
     public getReasonType(): string {
         return 'int';
     }
+
+    public render() {
+        return '';
+    }
 }
 
 export default IntParser;

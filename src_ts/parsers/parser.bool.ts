@@ -7,6 +7,10 @@ class BoolParser extends BaseParser {
     public getReasonType(): string {
         return 'bool';
     }
+
+    public render() {
+        return '';
+    }
 }
 
 export default BoolParser;

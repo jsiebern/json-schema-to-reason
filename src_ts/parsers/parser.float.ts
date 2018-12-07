@@ -7,6 +7,10 @@ class FloatParser extends BaseParser {
     public getReasonType(): string {
         return 'float';
     }
+
+    public render() {
+        return '';
+    }
 }
 
 export default FloatParser;

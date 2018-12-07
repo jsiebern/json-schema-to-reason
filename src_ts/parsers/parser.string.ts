@@ -7,6 +7,10 @@ class StringParser extends BaseParser {
     public getReasonType(): string {
         return 'string';
     }
+
+    public render() {
+        return '';
+    }
 }
 
 export default StringParser;
