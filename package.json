@@ -1,13 +1,14 @@
 {
   "name": "@jsiebern/json-schema-to-reason",
-  "version": "0.0.2",
-  "main": "src_ts/index.ts",
+  "version": "0.0.3",
+  "main": "./dist/index.js",
+  "types": "./index.d.ts",
   "repository": "https://github.com/jsiebern/json-schema-to-reason.git",
   "author": "Jonathan Siebern <jsiebern88@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "parcel public/index.html",
-    "start-ts": "parcel public/index_ts.html",
+    "start": "parcel public/index_ts.html",
+    "build": "tsc --project ./tsconfig.json src_ts/index.ts",
     "clean": "bsb -clean-world",
     "bsb": "bsb -make-world"
   },

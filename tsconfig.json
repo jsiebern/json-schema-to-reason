@@ -3,7 +3,7 @@
         "src_ts"
     ],
     "compilerOptions": {
-        "outDir": "./build/",
+        "outDir": "./dist/",
         "module": "commonjs",
         "target": "es5",
         "lib": [
@@ -24,7 +24,7 @@
         "noUnusedLocals": true,
         "experimentalDecorators": true,
         "downlevelIteration": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
     },
     "exclude": [
         "node_modules",
