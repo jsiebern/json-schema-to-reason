@@ -11,6 +11,7 @@ import BoolParser from './parser.bool';
 import ArrayParser from './parser.array';
 import AllOfParser from './parser.allOf';
 import UnionParser from './parser.union';
+import EnumParser from './parser.enum';
 
 const getParser = (schema: Schema, def: JSONSchema7Definition): false | ParserConstructable => {
     if (typeof def !== 'boolean') {
@@ -42,6 +43,9 @@ const getParser = (schema: Schema, def: JSONSchema7Definition): false | ParserCo
         }
         else if (def.allOf != null) {
             return AllOfParser;
+        }
+        else if (def.enum != null) {
+            return EnumParser;
         }
     }
     console.warn('NO_PARSER', def);

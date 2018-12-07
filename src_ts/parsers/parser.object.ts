@@ -42,7 +42,7 @@ class ObjectParser extends BaseParser {
             name: this.moduleName,
             properties: this.properties.map(property => ({
                 name: property.key,
-                optional: required.includes(property.key),
+                optional: !required.includes(property.key),
                 reasonType: property.getReasonType(),
             }))
         };
@@ -59,7 +59,7 @@ class ObjectParser extends BaseParser {
         }
     }
 
-    public render() {
+    public getGenericObjectProperties() {
         const genericObjectProperties = [
             ...this.module.properties.filter(p => p.reasonType === 'Js.t({..})').map(p => `'${generateAttributeName(p.name)}`),
             ...this.module.properties.filter(p => p.reasonType.includes('.t(') && !p.reasonType.includes('{..}')).reduce((prev, p) => {
@@ -72,7 +72,11 @@ class ObjectParser extends BaseParser {
                 return prev;
             }, [])
         ];
-        const genericObjects = genericObjectProperties.join(',');
+        return genericObjectProperties.join(',');
+    }
+
+    public render() {
+        const genericObjects = this.getGenericObjectProperties();
 
         return `
             module ${this.moduleName} {
@@ -87,6 +91,8 @@ class ObjectParser extends BaseParser {
                         `;
             }).join('\n')}
                 };
+                ${this.properties.map(property => property.getGetterFunc(this.module.properties.filter(p => p.name === property.key)[0].optional)).join('\n')}
+                let make = t;
             }
         `;
     }

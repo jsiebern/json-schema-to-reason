@@ -1,6 +1,6 @@
 import BaseParser, { Parser } from './_base';
 
-import { capitalize } from '../helpers';
+import { capitalize, generateAttributeName } from '../helpers';
 import getParser from './_getParser';
 
 class UnionParser extends BaseParser {
@@ -23,17 +23,34 @@ class UnionParser extends BaseParser {
         }).filter(p => typeof p !== 'boolean');
     }
     public getReasonType(): string {
-        if (!this.types) {
-            console.log(`${this.key}: Unsupported union types?`);
-            return '__ERROR__';
-        }
-        return `[
-            ${this.types.map(t => t ? `| \`${capitalize(t.getReasonType())}(${t.getReasonType()})` : '').join('\n')}
-        ]`;
+        return 'string';
     }
 
     public render() {
         return '';
+    }
+
+    public getGetterFunc(optional: boolean) {
+        const attributeName = generateAttributeName(this.key);
+        return `let ${attributeName}Get = (value) => {
+            let isNumeric: 'a => bool = [%raw {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}];
+            let isBool: 'a => bool = [%raw {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}];
+            ${optional ? `
+                ${attributeName}Get(value)->Belt.Option.map(v => isNumeric(v) ? \`Float(Obj.magic(v)) : isBool(v) ? \`Bool(Obj.magic(v)) : \`String(Obj.magic(v)));
+            ` : `
+            let v = ${attributeName}Get(value);
+            isNumeric(v) ? \`Float(Obj.magic(v)) : isBool(v) ? \`Bool(Obj.magic(v)) : \`String(Obj.magic(v));
+            `}
+        };`;
     }
 }
 

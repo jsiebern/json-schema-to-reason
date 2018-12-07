@@ -1,6 +1,0 @@
-- Split json schema into parsers
-- Parsers have parse / render functions (work recursively)
-- Recursive Parse should keep track of its definition path to maybe generate more meaningful module names
-- Parse should generate
-    - Module definition
-    - Module dependencies

@@ -8,6 +8,7 @@ export interface Parser {
 
     parse(): void;
     getReasonType(): string;
+    getGetterFunc(optional: boolean): string;
     render(): string;
 }
 
@@ -29,6 +30,8 @@ abstract class BaseParser implements Parser {
     public abstract parse(): void;
 
     public abstract getReasonType(): string;
+
+    public getGetterFunc(optional: boolean) { return '' };
 
     public abstract render(): string;
 }

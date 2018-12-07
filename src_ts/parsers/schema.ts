@@ -2,7 +2,7 @@ import { JSONSchema7, JSONSchema7Definition } from 'json-schema';
 import getParser from './_getParser';
 import { Parser } from './_base';
 
-type options = {
+export type options = {
     replaceRefs?: {
         re: RegExp,
         replaceWith: string,

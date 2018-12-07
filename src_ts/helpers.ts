@@ -7,6 +7,9 @@ export const isNumeric = (obj: any) => {
 };
 
 export const generateModuleName = (name: string) => {
+    if (isNumeric(name)) {
+        name = `V${name}`;
+    }
     return capitalize(name).replace(/-/mg, '');
 };
 

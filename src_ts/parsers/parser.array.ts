@@ -2,6 +2,7 @@ import BaseParser from './_base';
 
 import { Parser } from './_base';
 import getParser from './_getParser';
+import StringParser from './parser.string';
 
 class ArrayParser extends BaseParser {
     private itemsParser: Parser;
@@ -14,7 +15,8 @@ class ArrayParser extends BaseParser {
             return;
         }
         if (Array.isArray(this.def.items)) {
-            console.log('MULTI_ARRAY', this.def);
+            // TODO: Can be many things
+            this.itemsParser = new StringParser(this.schema, '', { type: 'string' });
             return;
         }
 
