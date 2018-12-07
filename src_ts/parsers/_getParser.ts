@@ -14,7 +14,7 @@ import UnionParser from './parser.union';
 import EnumParser from './parser.enum';
 
 const getParser = (schema: Schema, def: JSONSchema7Definition): false | ParserConstructable => {
-    if (typeof def !== 'boolean') {
+    if (typeof def !== 'boolean' && typeof def !== 'undefined') {
         if (def.type != null) {
             if (def.type === 'object') {
                 return ObjectParser;

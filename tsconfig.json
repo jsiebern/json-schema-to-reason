@@ -1,5 +1,6 @@
 {
     "include": [
+        "public",
         "src_ts"
     ],
     "compilerOptions": {

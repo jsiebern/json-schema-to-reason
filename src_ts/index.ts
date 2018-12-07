@@ -22,10 +22,18 @@ export default function (jsonString: string, extractType: string, options: optio
             type t('p) = ${extractType}.t(${genericObjects}) constraint 'p = (${genericObjects}); let make = ${extractType}.make;
         ` : `type t = ${extractType}.t; let make = ${extractType}.make;`;
 
+        let refmt = '';
+        try {
+            refmt = printRE(parseRE(reason));
+        }
+        catch (e) {
+            console.log(e);
+        }
+
         return {
             modules: parser.moduleParsers,
             string: reason,
-            refmt: printRE(parseRE(reason)),
+            refmt,
         };
     }
 

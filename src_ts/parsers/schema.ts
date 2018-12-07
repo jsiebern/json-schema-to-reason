@@ -25,7 +25,7 @@ class SchemaParser {
 
     public getDefinition(defName: string): { moduleName: string, def: JSONSchema7Definition | undefined } {
         const defNameClean = defName.replace('#/definitions/', '');
-        const re = /[<,]([a-zA-Z_]*)[,>]/gm;
+        const re = /[<,&]([a-zA-Z_]*)[,>]/gm;
         const reResult = re.exec(defNameClean);
         const moduleName = reResult ? reResult[1] : defNameClean;
         return { moduleName, def: this._definitions[defNameClean] };
