@@ -2,7 +2,7 @@
 import json from './test.json';
 import Converter from '../src_ts/index';
 
-const res = Converter(JSON.stringify(json), 'ThemeOptions', {
+const res = Converter(JSON.stringify(json), 'Theme', {
     replaceRefs: [
         {
             re: /CSSProperties/m,
@@ -10,11 +10,15 @@ const res = Converter(JSON.stringify(json), 'ThemeOptions', {
         },
         {
             re: /Partial.*([a-zA-Z]*)Props/m,
-            replaceWith: 'Js.t({..})',
+            replaceWith: 'Js.Json.t',
         },
         {
             re: /React\.>/m,
-            replaceWith: 'Js.t({..})',
+            replaceWith: 'Js.Json.t',
+        },
+        {
+            re: /HTML.*Element/m,
+            replaceWith: 'ReasonReact.reactElement',
         },
     ],
 });

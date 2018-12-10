@@ -5,6 +5,28 @@ import { JSONSchema7Definition } from 'json-schema';
 import SchemaParser from './schema';
 import { Parser } from './_base';
 
+export const getReplacement = (schema: SchemaParser, def: JSONSchema7Definition) => {
+    if (typeof def === 'boolean' || typeof def.$ref === 'undefined') {
+        return null;
+    }
+    const refDef = schema.getDefinition(def.$ref);
+    if (!refDef.def) {
+        return null;
+    }
+    const replaceRefs = schema.getOptions().replaceRefs;
+    if (typeof replaceRefs !== 'undefined') {
+        const refKey = def.$ref;
+        for (let i = 0; i < replaceRefs.length; i++) {
+            const replaceRef = { ...replaceRefs[i] };
+            if (replaceRef.re.test(refKey)) {
+                return replaceRef.replaceWith
+            }
+        }
+    }
+
+    return null;
+}
+
 class RefParser extends BaseParser {
     private parser: Parser | false = false;
     private replacement: string | null = null;
@@ -18,16 +40,9 @@ class RefParser extends BaseParser {
         if (!refDef.def) {
             return;
         }
-        const replaceRefs = schema.getOptions().replaceRefs;
-        if (typeof replaceRefs !== 'undefined') {
-            const refKey = def.$ref;
-            for (let i = 0; i < replaceRefs.length; i++) {
-                const replaceRef = { ...replaceRefs[i] };
-                if (replaceRef.re.test(refKey)) {
-                    this.replacement = replaceRef.replaceWith
-                    return;
-                }
-            }
+        this.replacement = getReplacement(schema, def);
+        if (this.replacement) {
+            return;
         }
 
         const parserClass = getParser(schema, refDef.def);
@@ -51,6 +66,7 @@ class RefParser extends BaseParser {
         if (!this.parser) {
             return '__ERROR__';
         }
+
         return this.parser.getReasonType();
     }
 

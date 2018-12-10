@@ -19,9 +19,9 @@ class ObjectParser extends BaseParser {
         if (!this.def.properties) {
             return;
         }
-        if (this.schema.hasModule(this.key)) {
-            return;
-        }
+        // if (this.schema.hasModule(this.key)) {
+        //     return;
+        // }
 
         const properties = this.def.properties;
         Object.keys(properties).forEach(key => {
@@ -36,6 +36,10 @@ class ObjectParser extends BaseParser {
             this.properties.push(new parser(this.schema, key, properties[key]));
         });
         this.properties.forEach(p => p.parse());
+
+        if (!this.properties.length) {
+            return;
+        }
         const required = this.def.required ? this.def.required : [];
 
         this.module = this.schema.modules[this.moduleName] = {
@@ -55,7 +59,7 @@ class ObjectParser extends BaseParser {
             return `${this.moduleName}.t${genericObjects ? `(${genericObjects})` : ''}`;
         }
         else {
-            return 'Js.t({..})';
+            return 'Js.Json.t';
         }
     }
 

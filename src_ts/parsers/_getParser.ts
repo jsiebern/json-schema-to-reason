@@ -12,6 +12,7 @@ import ArrayParser from './parser.array';
 import AllOfParser from './parser.allOf';
 import UnionParser from './parser.union';
 import EnumParser from './parser.enum';
+import AnyOfParser from './parser.anyOf';
 
 const getParser = (schema: Schema, def: JSONSchema7Definition): false | ParserConstructable => {
     if (typeof def !== 'boolean' && typeof def !== 'undefined') {
@@ -43,6 +44,9 @@ const getParser = (schema: Schema, def: JSONSchema7Definition): false | ParserCo
         }
         else if (def.allOf != null) {
             return AllOfParser;
+        }
+        else if (def.anyOf != null) {
+            return AnyOfParser;
         }
         else if (def.enum != null) {
             return EnumParser;
