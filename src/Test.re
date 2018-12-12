@@ -18,37 +18,1749 @@ module BreakpointValues = {
 
 module Breakpoints = {
   [@bs.deriving abstract]
-  type t('between, 'down, 'only, 'up, 'width) = {
-    [@bs.optional] [@bs.as "between"]
-    between: Js.t('between),
-    [@bs.optional] [@bs.as "down"]
-    down: Js.t('down),
-    [@bs.optional] [@bs.as "keys"]
+  type t = {
+    [@bs.as "between"]
+    between: Js.Json.t,
+    [@bs.as "down"]
+    down: Js.Json.t,
+    [@bs.as "keys"]
     keys: array(string),
-    [@bs.optional] [@bs.as "only"]
-    only: Js.t('only),
-    [@bs.optional] [@bs.as "step"]
-    step: float,
-    [@bs.optional] [@bs.as "unit"]
-    unit: string,
-    [@bs.optional] [@bs.as "up"]
-    up: Js.t('up),
-    [@bs.optional] [@bs.as "values"]
+    [@bs.as "only"]
+    only: Js.Json.t,
+    [@bs.as "up"]
+    up: Js.Json.t,
+    [@bs.as "values"]
     values: BreakpointValues.t,
-    [@bs.optional] [@bs.as "width"]
-    width: Js.t('width),
+    [@bs.as "width"]
+    width: Js.Json.t,
   };
 
   let make = t;
 };
 
-module MixinsOptions = {
+module Mixins = {
   [@bs.deriving abstract]
-  type t('gutters) = {
+  type t = {
+    [@bs.as "gutters"]
+    gutters: Js.Json.t,
+    [@bs.as "toolbar"]
+    toolbar: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module AppBarClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "colorDefault"]
+    colorDefault: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "positionAbsolute"]
+    positionAbsolute: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "positionFixed"]
+    positionFixed: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "positionRelative"]
+    positionRelative: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "positionStatic"]
+    positionStatic: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "positionSticky"]
+    positionSticky: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module AvatarClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "colorDefault"]
+    colorDefault: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "img"]
+    img: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module BackdropClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "invisible"]
+    invisible: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module BadgeClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "badge"]
+    badge: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "invisible"]
+    invisible: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module CSSProperties = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module BottomNavigationActionClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "iconOnly"]
+    iconOnly: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "label"]
+    label: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "selected"]
+    selected: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "wrapper"]
+    wrapper: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ButtonClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "colorInherit"]
+    colorInherit: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "contained"]
+    contained: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "containedPrimary"]
+    containedPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "containedSecondary"]
+    containedSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "extendedFab"]
+    extendedFab: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "fab"]
+    fab: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "flat"]
+    flat: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "flatPrimary"]
+    flatPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "flatSecondary"]
+    flatSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focusVisible"]
+    focusVisible: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "fullWidth"]
+    fullWidth: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "label"]
+    label: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "mini"]
+    mini: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "outlined"]
+    outlined: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "outlinedPrimary"]
+    outlinedPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "outlinedSecondary"]
+    outlinedSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "raised"]
+    raised: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "raisedPrimary"]
+    raisedPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "raisedSecondary"]
+    raisedSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "sizeLarge"]
+    sizeLarge: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "sizeSmall"]
+    sizeSmall: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "text"]
+    text: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "textPrimary"]
+    textPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "textSecondary"]
+    textSecondary: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ButtonBaseClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focusVisible"]
+    focusVisible: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module CardActionAreaClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "focusHighlight"]
+    focusHighlight: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focusVisible"]
+    focusVisible: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module CardActionsClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "action"]
+    action: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module CardHeaderClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "action"]
+    action: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "avatar"]
+    avatar: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "content"]
+    content: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "subheader"]
+    subheader: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "title"]
+    title: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module CardMediaClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "media"]
+    media: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module CheckboxClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "checked"]
+    checked: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "indeterminate"]
+    indeterminate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "input"]
+    input: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ChipClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "avatar"]
+    avatar: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "avatarChildren"]
+    avatarChildren: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "avatarPrimary"]
+    avatarPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "avatarSecondary"]
+    avatarSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "clickable"]
+    clickable: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "clickablePrimary"]
+    clickablePrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "clickableSecondary"]
+    clickableSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "deletable"]
+    deletable: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "deletablePrimary"]
+    deletablePrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "deletableSecondary"]
+    deletableSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "deleteIcon"]
+    deleteIcon: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "deleteIconOutlinedColorPrimary"]
+    deleteIconOutlinedColorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "deleteIconOutlinedColorSecondary"]
+    deleteIconOutlinedColorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "deleteIconPrimary"]
+    deleteIconPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "deleteIconSecondary"]
+    deleteIconSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "label"]
+    label: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "outlined"]
+    outlined: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "outlinedPrimary"]
+    outlinedPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "outlinedSecondary"]
+    outlinedSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module CircularProgressClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "circle"]
+    circle: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "circleDisableShrink"]
+    circleDisableShrink: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "circleIndeterminate"]
+    circleIndeterminate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "circleStatic"]
+    circleStatic: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "indeterminate"]
+    indeterminate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "static"]
+    static: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "svg"]
+    svg: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module CollapseClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "container"]
+    container: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "entered"]
+    entered: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "wrapper"]
+    wrapper: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "wrapperInner"]
+    wrapperInner: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module DialogClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "container"]
+    container: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paper"]
+    paper: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperFullScreen"]
+    paperFullScreen: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperFullWidth"]
+    paperFullWidth: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperScrollBody"]
+    paperScrollBody: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperScrollPaper"]
+    paperScrollPaper: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperWidthLg"]
+    paperWidthLg: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperWidthMd"]
+    paperWidthMd: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperWidthSm"]
+    paperWidthSm: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperWidthXl"]
+    paperWidthXl: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperWidthXs"]
+    paperWidthXs: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "scrollBody"]
+    scrollBody: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "scrollPaper"]
+    scrollPaper: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module DividerClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "absolute"]
+    absolute: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inset"]
+    inset: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "light"]
+    light: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "middle"]
+    middle: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module DrawerClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "docked"]
+    docked: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "modal"]
+    modal: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paper"]
+    paper: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperAnchorBottom"]
+    paperAnchorBottom: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperAnchorDockedBottom"]
+    paperAnchorDockedBottom: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperAnchorDockedLeft"]
+    paperAnchorDockedLeft: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperAnchorDockedRight"]
+    paperAnchorDockedRight: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperAnchorDockedTop"]
+    paperAnchorDockedTop: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperAnchorLeft"]
+    paperAnchorLeft: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperAnchorRight"]
+    paperAnchorRight: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paperAnchorTop"]
+    paperAnchorTop: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ExpansionPanelClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "expanded"]
+    expanded: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ExpansionPanelSummaryClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "content"]
+    content: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "expandIcon"]
+    expandIcon: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "expanded"]
+    expanded: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focused"]
+    focused: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module FabClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "colorInherit"]
+    colorInherit: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "extended"]
+    extended: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focusVisible"]
+    focusVisible: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "label"]
+    label: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "primary"]
+    primary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "secondary"]
+    secondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "sizeMedium"]
+    sizeMedium: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "sizeSmall"]
+    sizeSmall: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module FilledInputClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "adornedEnd"]
+    adornedEnd: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "adornedStart"]
+    adornedStart: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "error"]
+    error: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focused"]
+    focused: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "input"]
+    input: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputAdornedEnd"]
+    inputAdornedEnd: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputAdornedStart"]
+    inputAdornedStart: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputMarginDense"]
+    inputMarginDense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputMultiline"]
+    inputMultiline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "multiline"]
+    multiline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "underline"]
+    underline: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module FormControlClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "fullWidth"]
+    fullWidth: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "marginDense"]
+    marginDense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "marginNormal"]
+    marginNormal: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module FormControlLabelClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "label"]
+    label: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "start"]
+    start: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module FormGroupClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "row"]
+    row: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module FormHelperTextClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "contained"]
+    contained: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "error"]
+    error: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "filled"]
+    filled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focused"]
+    focused: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "marginDense"]
+    marginDense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "required"]
+    required: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module FormLabelClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "asterisk"]
+    asterisk: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "error"]
+    error: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "filled"]
+    filled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focused"]
+    focused: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "required"]
+    required: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module GridClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "align-content-xs-center"]
+    alignContentXsCenter: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "align-content-xs-flex-end"]
+    alignContentXsFlexEnd: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "align-content-xs-flex-start"]
+    alignContentXsFlexStart: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "align-content-xs-space-around"]
+    alignContentXsSpaceAround: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "align-content-xs-space-between"]
+    alignContentXsSpaceBetween: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "align-items-xs-baseline"]
+    alignItemsXsBaseline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "align-items-xs-center"]
+    alignItemsXsCenter: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "align-items-xs-flex-end"]
+    alignItemsXsFlexEnd: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "align-items-xs-flex-start"]
+    alignItemsXsFlexStart: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "container"]
+    container: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "direction-xs-column"]
+    directionXsColumn: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "direction-xs-column-reverse"]
+    directionXsColumnReverse: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "direction-xs-row-reverse"]
+    directionXsRowReverse: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-1"]
+    gridXs1: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-10"]
+    gridXs10: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-11"]
+    gridXs11: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-12"]
+    gridXs12: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-2"]
+    gridXs2: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-3"]
+    gridXs3: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-4"]
+    gridXs4: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-5"]
+    gridXs5: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-6"]
+    gridXs6: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-7"]
+    gridXs7: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-8"]
+    gridXs8: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-9"]
+    gridXs9: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-auto"]
+    gridXsAuto: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "grid-xs-true"]
+    gridXsTrue: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "item"]
+    item: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "justify-xs-center"]
+    justifyXsCenter: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "justify-xs-flex-end"]
+    justifyXsFlexEnd: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "justify-xs-space-around"]
+    justifyXsSpaceAround: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "justify-xs-space-between"]
+    justifyXsSpaceBetween: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "spacing-xs-16"]
+    spacingXs16: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "spacing-xs-24"]
+    spacingXs24: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "spacing-xs-40"]
+    spacingXs40: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "spacing-xs-8"]
+    spacingXs8: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "wrap-xs-nowrap"]
+    wrapXsNowrap: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "wrap-xs-wrap-reverse"]
+    wrapXsWrapReverse: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module GridListTileClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "imgFullHeight"]
+    imgFullHeight: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "imgFullWidth"]
+    imgFullWidth: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "tile"]
+    tile: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module GridListTileBarClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "actionIcon"]
+    actionIcon: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "actionIconActionPosLeft"]
+    actionIconActionPosLeft: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "rootSubtitle"]
+    rootSubtitle: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "subtitle"]
+    subtitle: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "title"]
+    title: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "titlePositionBottom"]
+    titlePositionBottom: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "titlePositionTop"]
+    titlePositionTop: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "titleWrapActionPosLeft"]
+    titleWrapActionPosLeft: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "titleWrapActionPosRight"]
+    titleWrapActionPosRight: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module IconClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "colorAction"]
+    colorAction: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorDisabled"]
+    colorDisabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorError"]
+    colorError: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "fontSizeInherit"]
+    fontSizeInherit: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "fontSizeLarge"]
+    fontSizeLarge: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "fontSizeSmall"]
+    fontSizeSmall: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module IconButtonClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "colorInherit"]
+    colorInherit: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "label"]
+    label: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module InputClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "error"]
+    error: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focused"]
+    focused: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "formControl"]
+    formControl: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "fullWidth"]
+    fullWidth: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "input"]
+    input: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputMarginDense"]
+    inputMarginDense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputMultiline"]
+    inputMultiline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputType"]
+    inputType: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputTypeSearch"]
+    inputTypeSearch: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "multiline"]
+    multiline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "underline"]
+    underline: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module InputAdornmentClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "filled"]
+    filled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "positionEnd"]
+    positionEnd: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "positionStart"]
+    positionStart: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module InputBaseClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "error"]
+    error: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focused"]
+    focused: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "formControl"]
+    formControl: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "fullWidth"]
+    fullWidth: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "input"]
+    input: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputDisabled"]
+    inputDisabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputMarginDense"]
+    inputMarginDense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputMultiline"]
+    inputMultiline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputType"]
+    inputType: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputTypeSearch"]
+    inputTypeSearch: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "multiline"]
+    multiline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module InputLabelClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "animated"]
+    animated: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "error"]
+    error: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "filled"]
+    filled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focused"]
+    focused: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "formControl"]
+    formControl: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "marginDense"]
+    marginDense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "outlined"]
+    outlined: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "required"]
+    required: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "shrink"]
+    shrink: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module LinearProgressClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "bar"]
+    bar: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "bar1Buffer"]
+    bar1Buffer: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "bar1Determinate"]
+    bar1Determinate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "bar1Indeterminate"]
+    bar1Indeterminate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "bar2Buffer"]
+    bar2Buffer: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "bar2Determinate"]
+    bar2Determinate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "bar2Indeterminate"]
+    bar2Indeterminate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "barColorPrimary"]
+    barColorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "barColorSecondary"]
+    barColorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "buffer"]
+    buffer: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "dashed"]
+    dashed: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "dashedColorPrimary"]
+    dashedColorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "dashedColorSecondary"]
+    dashedColorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "determinate"]
+    determinate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "indeterminate"]
+    indeterminate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "query"]
+    query: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ListClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "dense"]
+    dense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "padding"]
+    padding: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "subheader"]
+    subheader: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ListItemClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "button"]
+    button: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "container"]
+    container: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "default"]
+    default: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "dense"]
+    dense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "divider"]
+    divider: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focusVisible"]
+    focusVisible: ReactDOMRe.Style.t,
     [@bs.optional] [@bs.as "gutters"]
-    gutters: Js.t('gutters),
+    gutters: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "secondaryAction"]
+    secondaryAction: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "selected"]
+    selected: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ListItemAvatarClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "icon"]
+    icon: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ListItemTextClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "dense"]
+    dense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inset"]
+    inset: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "primary"]
+    primary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "secondary"]
+    secondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "textDense"]
+    textDense: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ListSubheaderClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "colorInherit"]
+    colorInherit: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "gutters"]
+    gutters: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inset"]
+    inset: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "sticky"]
+    sticky: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module MenuItemClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "gutters"]
+    gutters: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "selected"]
+    selected: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module MobileStepperClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "dot"]
+    dot: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "dotActive"]
+    dotActive: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "dots"]
+    dots: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "positionBottom"]
+    positionBottom: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "positionStatic"]
+    positionStatic: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "positionTop"]
+    positionTop: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "progress"]
+    progress: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ModalClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "hidden"]
+    hidden: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module NativeSelectClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "filled"]
+    filled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "icon"]
+    icon: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "outlined"]
+    outlined: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "select"]
+    select: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "selectMenu"]
+    selectMenu: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module OutlinedInputClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "adornedEnd"]
+    adornedEnd: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "adornedStart"]
+    adornedStart: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "error"]
+    error: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "focused"]
+    focused: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "input"]
+    input: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputAdornedEnd"]
+    inputAdornedEnd: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputAdornedStart"]
+    inputAdornedStart: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputMarginDense"]
+    inputMarginDense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "inputMultiline"]
+    inputMultiline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "multiline"]
+    multiline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "notchedOutline"]
+    notchedOutline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module PaperClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "elevation0"]
+    elevation0: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation1"]
+    elevation1: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation10"]
+    elevation10: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation11"]
+    elevation11: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation12"]
+    elevation12: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation13"]
+    elevation13: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation14"]
+    elevation14: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation15"]
+    elevation15: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation16"]
+    elevation16: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation17"]
+    elevation17: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation18"]
+    elevation18: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation19"]
+    elevation19: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation2"]
+    elevation2: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation20"]
+    elevation20: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation21"]
+    elevation21: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation22"]
+    elevation22: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation23"]
+    elevation23: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation24"]
+    elevation24: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation3"]
+    elevation3: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation4"]
+    elevation4: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation5"]
+    elevation5: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation6"]
+    elevation6: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation7"]
+    elevation7: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation8"]
+    elevation8: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "elevation9"]
+    elevation9: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "rounded"]
+    rounded: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module RadioClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "checked"]
+    checked: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "input"]
+    input: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module SnackbarClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "anchorOriginBottomCenter"]
+    anchorOriginBottomCenter: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "anchorOriginBottomLeft"]
+    anchorOriginBottomLeft: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "anchorOriginBottomRight"]
+    anchorOriginBottomRight: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "anchorOriginTopCenter"]
+    anchorOriginTopCenter: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "anchorOriginTopLeft"]
+    anchorOriginTopLeft: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "anchorOriginTopRight"]
+    anchorOriginTopRight: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module SnackbarContentClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "action"]
+    action: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "message"]
+    message: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module StepperClasskey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "alternativeLabel"]
+    alternativeLabel: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "horizontal"]
+    horizontal: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "vertical"]
+    vertical: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module StepButtonClasskey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "touchRipple"]
+    touchRipple: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "vertical"]
+    vertical: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module StepConnectorClasskey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "active"]
+    active: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "alternativeLabel"]
+    alternativeLabel: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "completed"]
+    completed: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "horizontal"]
+    horizontal: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "line"]
+    line: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "lineHorizontal"]
+    lineHorizontal: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "lineVertical"]
+    lineVertical: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "vertical"]
+    vertical: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module StepContentClasskey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "last"]
+    last: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "transition"]
+    transition: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module StepIconClasskey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "active"]
+    active: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "completed"]
+    completed: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "error"]
+    error: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "text"]
+    text: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module StepLabelClasskey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "active"]
+    active: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "alternativeLabel"]
+    alternativeLabel: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "completed"]
+    completed: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "error"]
+    error: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "horizontal"]
+    horizontal: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "iconContainer"]
+    iconContainer: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "label"]
+    label: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "labelContainer"]
+    labelContainer: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "vertical"]
+    vertical: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module SwitchClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "bar"]
+    bar: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "checked"]
+    checked: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorPrimary"]
+    colorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "icon"]
+    icon: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "iconChecked"]
+    iconChecked: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "input"]
+    input: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "switchBase"]
+    switchBase: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module SwitchBaseClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "checked"]
+    checked: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "input"]
+    input: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module TabClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "disabled"]
+    disabled: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "fullWidth"]
+    fullWidth: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "label"]
+    label: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "labelContainer"]
+    labelContainer: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "labelIcon"]
+    labelIcon: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "labelWrapped"]
+    labelWrapped: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "selected"]
+    selected: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "textColorInherit"]
+    textColorInherit: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "textColorPrimary"]
+    textColorPrimary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "textColorSecondary"]
+    textColorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "wrapper"]
+    wrapper: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module TableCellClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "body"]
+    body: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "footer"]
+    footer: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "head"]
+    head: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "numeric"]
+    numeric: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paddingCheckbox"]
+    paddingCheckbox: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paddingDense"]
+    paddingDense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paddingNone"]
+    paddingNone: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module TablePaginationClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "actions"]
+    actions: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "caption"]
+    caption: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "input"]
+    input: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "menuItem"]
+    menuItem: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "select"]
+    select: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "selectIcon"]
+    selectIcon: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "selectRoot"]
+    selectRoot: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "spacer"]
+    spacer: ReactDOMRe.Style.t,
     [@bs.optional] [@bs.as "toolbar"]
     toolbar: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module TableRowClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "footer"]
+    footer: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "head"]
+    head: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "hover"]
+    hover: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "selected"]
+    selected: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module TableSortLabelClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "active"]
+    active: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "icon"]
+    icon: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "iconDirectionAsc"]
+    iconDirectionAsc: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "iconDirectionDesc"]
+    iconDirectionDesc: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module TabsClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "centered"]
+    centered: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "fixed"]
+    fixed: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "flexContainer"]
+    flexContainer: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "indicator"]
+    indicator: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "scrollButtons"]
+    scrollButtons: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "scrollButtonsAuto"]
+    scrollButtonsAuto: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "scrollable"]
+    scrollable: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "scroller"]
+    scroller: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module ToolbarClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "dense"]
+    dense: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "gutters"]
+    gutters: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "regular"]
+    regular: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module TooltipClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "popper"]
+    popper: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "tooltip"]
+    tooltip: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "tooltipPlacementBottom"]
+    tooltipPlacementBottom: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "tooltipPlacementLeft"]
+    tooltipPlacementLeft: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "tooltipPlacementRight"]
+    tooltipPlacementRight: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "tooltipPlacementTop"]
+    tooltipPlacementTop: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "touch"]
+    touch: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module TouchRippleClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "child"]
+    child: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "childLeaving"]
+    childLeaving: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "childPulsate"]
+    childPulsate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "ripple"]
+    ripple: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "ripplePulsate"]
+    ripplePulsate: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "rippleVisible"]
+    rippleVisible: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+  };
+
+  let make = t;
+};
+
+module TypographyClassKey = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.optional] [@bs.as "alignCenter"]
+    alignCenter: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "alignJustify"]
+    alignJustify: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "alignLeft"]
+    alignLeft: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "alignRight"]
+    alignRight: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "body1"]
+    body1: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "body2"]
+    body2: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "button"]
+    button: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "caption"]
+    caption: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorInherit"]
+    colorInherit: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorSecondary"]
+    colorSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "colorTextSecondary"]
+    colorTextSecondary: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "display1"]
+    display1: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "display2"]
+    display2: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "display3"]
+    display3: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "display4"]
+    display4: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "gutterBottom"]
+    gutterBottom: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "h1"]
+    h1: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "h2"]
+    h2: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "h3"]
+    h3: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "h4"]
+    h4: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "h5"]
+    h5: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "h6"]
+    h6: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "headline"]
+    headline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "noWrap"]
+    noWrap: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "overline"]
+    overline: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "paragraph"]
+    paragraph: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "root"]
+    root: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "srOnly"]
+    srOnly: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "subheading"]
+    subheading: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "subtitle1"]
+    subtitle1: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "subtitle2"]
+    subtitle2: ReactDOMRe.Style.t,
+    [@bs.optional] [@bs.as "title"]
+    title: ReactDOMRe.Style.t,
   };
 
   let make = t;
@@ -58,185 +1770,187 @@ module Overrides = {
   [@bs.deriving abstract]
   type t = {
     [@bs.optional] [@bs.as "MuiAppBar"]
-    muiAppBar: ReactDOMRe.Style.t,
+    muiAppBar: AppBarClassKey.t,
     [@bs.optional] [@bs.as "MuiAvatar"]
-    muiAvatar: ReactDOMRe.Style.t,
+    muiAvatar: AvatarClassKey.t,
     [@bs.optional] [@bs.as "MuiBackdrop"]
-    muiBackdrop: ReactDOMRe.Style.t,
+    muiBackdrop: BackdropClassKey.t,
     [@bs.optional] [@bs.as "MuiBadge"]
-    muiBadge: ReactDOMRe.Style.t,
+    muiBadge: BadgeClassKey.t,
     [@bs.optional] [@bs.as "MuiBottomNavigation"]
-    muiBottomNavigation: ReactDOMRe.Style.t,
+    muiBottomNavigation: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiBottomNavigationAction"]
-    muiBottomNavigationAction: ReactDOMRe.Style.t,
+    muiBottomNavigationAction: BottomNavigationActionClassKey.t,
     [@bs.optional] [@bs.as "MuiButton"]
-    muiButton: ReactDOMRe.Style.t,
+    muiButton: ButtonClassKey.t,
     [@bs.optional] [@bs.as "MuiButtonBase"]
-    muiButtonBase: ReactDOMRe.Style.t,
+    muiButtonBase: ButtonBaseClassKey.t,
     [@bs.optional] [@bs.as "MuiCard"]
-    muiCard: ReactDOMRe.Style.t,
+    muiCard: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiCardActionArea"]
-    muiCardActionArea: ReactDOMRe.Style.t,
+    muiCardActionArea: CardActionAreaClassKey.t,
     [@bs.optional] [@bs.as "MuiCardActions"]
-    muiCardActions: ReactDOMRe.Style.t,
+    muiCardActions: CardActionsClassKey.t,
     [@bs.optional] [@bs.as "MuiCardContent"]
-    muiCardContent: ReactDOMRe.Style.t,
+    muiCardContent: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiCardHeader"]
-    muiCardHeader: ReactDOMRe.Style.t,
+    muiCardHeader: CardHeaderClassKey.t,
     [@bs.optional] [@bs.as "MuiCardMedia"]
-    muiCardMedia: ReactDOMRe.Style.t,
+    muiCardMedia: CardMediaClassKey.t,
     [@bs.optional] [@bs.as "MuiCheckbox"]
-    muiCheckbox: ReactDOMRe.Style.t,
+    muiCheckbox: CheckboxClassKey.t,
     [@bs.optional] [@bs.as "MuiChip"]
-    muiChip: ReactDOMRe.Style.t,
+    muiChip: ChipClassKey.t,
     [@bs.optional] [@bs.as "MuiCircularProgress"]
-    muiCircularProgress: ReactDOMRe.Style.t,
+    muiCircularProgress: CircularProgressClassKey.t,
     [@bs.optional] [@bs.as "MuiCollapse"]
-    muiCollapse: ReactDOMRe.Style.t,
+    muiCollapse: CollapseClassKey.t,
     [@bs.optional] [@bs.as "MuiCssBaseline"]
-    muiCssBaseline: ReactDOMRe.Style.t,
+    muiCssBaseline: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiDialog"]
-    muiDialog: ReactDOMRe.Style.t,
+    muiDialog: DialogClassKey.t,
     [@bs.optional] [@bs.as "MuiDialogActions"]
-    muiDialogActions: ReactDOMRe.Style.t,
+    muiDialogActions: CardActionsClassKey.t,
     [@bs.optional] [@bs.as "MuiDialogContent"]
-    muiDialogContent: ReactDOMRe.Style.t,
+    muiDialogContent: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiDialogContentText"]
-    muiDialogContentText: ReactDOMRe.Style.t,
+    muiDialogContentText: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiDialogTitle"]
-    muiDialogTitle: ReactDOMRe.Style.t,
+    muiDialogTitle: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiDivider"]
-    muiDivider: ReactDOMRe.Style.t,
+    muiDivider: DividerClassKey.t,
     [@bs.optional] [@bs.as "MuiDrawer"]
-    muiDrawer: ReactDOMRe.Style.t,
+    muiDrawer: DrawerClassKey.t,
     [@bs.optional] [@bs.as "MuiExpansionPanel"]
-    muiExpansionPanel: ReactDOMRe.Style.t,
+    muiExpansionPanel: ExpansionPanelClassKey.t,
     [@bs.optional] [@bs.as "MuiExpansionPanelActions"]
-    muiExpansionPanelActions: ReactDOMRe.Style.t,
+    muiExpansionPanelActions: CardActionsClassKey.t,
     [@bs.optional] [@bs.as "MuiExpansionPanelDetails"]
-    muiExpansionPanelDetails: ReactDOMRe.Style.t,
+    muiExpansionPanelDetails: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiExpansionPanelSummary"]
-    muiExpansionPanelSummary: ReactDOMRe.Style.t,
+    muiExpansionPanelSummary: ExpansionPanelSummaryClassKey.t,
+    [@bs.optional] [@bs.as "MuiFab"]
+    muiFab: FabClassKey.t,
     [@bs.optional] [@bs.as "MuiFilledInput"]
-    muiFilledInput: ReactDOMRe.Style.t,
+    muiFilledInput: FilledInputClassKey.t,
     [@bs.optional] [@bs.as "MuiFormControl"]
-    muiFormControl: ReactDOMRe.Style.t,
+    muiFormControl: FormControlClassKey.t,
     [@bs.optional] [@bs.as "MuiFormControlLabel"]
-    muiFormControlLabel: ReactDOMRe.Style.t,
+    muiFormControlLabel: FormControlLabelClassKey.t,
     [@bs.optional] [@bs.as "MuiFormGroup"]
-    muiFormGroup: ReactDOMRe.Style.t,
+    muiFormGroup: FormGroupClassKey.t,
     [@bs.optional] [@bs.as "MuiFormHelperText"]
-    muiFormHelperText: ReactDOMRe.Style.t,
+    muiFormHelperText: FormHelperTextClassKey.t,
     [@bs.optional] [@bs.as "MuiFormLabel"]
-    muiFormLabel: ReactDOMRe.Style.t,
+    muiFormLabel: FormLabelClassKey.t,
     [@bs.optional] [@bs.as "MuiGrid"]
-    muiGrid: ReactDOMRe.Style.t,
+    muiGrid: GridClassKey.t,
     [@bs.optional] [@bs.as "MuiGridList"]
-    muiGridList: ReactDOMRe.Style.t,
+    muiGridList: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiGridListTile"]
-    muiGridListTile: ReactDOMRe.Style.t,
+    muiGridListTile: GridListTileClassKey.t,
     [@bs.optional] [@bs.as "MuiGridListTileBar"]
-    muiGridListTileBar: ReactDOMRe.Style.t,
+    muiGridListTileBar: GridListTileBarClassKey.t,
     [@bs.optional] [@bs.as "MuiIcon"]
-    muiIcon: ReactDOMRe.Style.t,
+    muiIcon: IconClassKey.t,
     [@bs.optional] [@bs.as "MuiIconButton"]
-    muiIconButton: ReactDOMRe.Style.t,
+    muiIconButton: IconButtonClassKey.t,
     [@bs.optional] [@bs.as "MuiInput"]
-    muiInput: ReactDOMRe.Style.t,
+    muiInput: InputClassKey.t,
     [@bs.optional] [@bs.as "MuiInputAdornment"]
-    muiInputAdornment: ReactDOMRe.Style.t,
+    muiInputAdornment: InputAdornmentClassKey.t,
     [@bs.optional] [@bs.as "MuiInputBase"]
-    muiInputBase: ReactDOMRe.Style.t,
+    muiInputBase: InputBaseClassKey.t,
     [@bs.optional] [@bs.as "MuiInputLabel"]
-    muiInputLabel: ReactDOMRe.Style.t,
+    muiInputLabel: InputLabelClassKey.t,
     [@bs.optional] [@bs.as "MuiLinearProgress"]
-    muiLinearProgress: ReactDOMRe.Style.t,
+    muiLinearProgress: LinearProgressClassKey.t,
     [@bs.optional] [@bs.as "MuiList"]
-    muiList: ReactDOMRe.Style.t,
+    muiList: ListClassKey.t,
     [@bs.optional] [@bs.as "MuiListItem"]
-    muiListItem: ReactDOMRe.Style.t,
+    muiListItem: ListItemClassKey.t,
     [@bs.optional] [@bs.as "MuiListItemAvatar"]
-    muiListItemAvatar: ReactDOMRe.Style.t,
+    muiListItemAvatar: ListItemAvatarClassKey.t,
     [@bs.optional] [@bs.as "MuiListItemIcon"]
-    muiListItemIcon: ReactDOMRe.Style.t,
+    muiListItemIcon: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiListItemSecondaryAction"]
-    muiListItemSecondaryAction: ReactDOMRe.Style.t,
+    muiListItemSecondaryAction: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiListItemText"]
-    muiListItemText: ReactDOMRe.Style.t,
+    muiListItemText: ListItemTextClassKey.t,
     [@bs.optional] [@bs.as "MuiListSubheader"]
-    muiListSubheader: ReactDOMRe.Style.t,
+    muiListSubheader: ListSubheaderClassKey.t,
     [@bs.optional] [@bs.as "MuiMenu"]
-    muiMenu: ReactDOMRe.Style.t,
+    muiMenu: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiMenuItem"]
-    muiMenuItem: ReactDOMRe.Style.t,
+    muiMenuItem: MenuItemClassKey.t,
     [@bs.optional] [@bs.as "MuiMobileStepper"]
-    muiMobileStepper: ReactDOMRe.Style.t,
+    muiMobileStepper: MobileStepperClassKey.t,
     [@bs.optional] [@bs.as "MuiModal"]
-    muiModal: ReactDOMRe.Style.t,
+    muiModal: ModalClassKey.t,
     [@bs.optional] [@bs.as "MuiNativeSelect"]
-    muiNativeSelect: ReactDOMRe.Style.t,
+    muiNativeSelect: NativeSelectClassKey.t,
     [@bs.optional] [@bs.as "MuiOutlinedInput"]
-    muiOutlinedInput: ReactDOMRe.Style.t,
+    muiOutlinedInput: OutlinedInputClassKey.t,
     [@bs.optional] [@bs.as "MuiPaper"]
-    muiPaper: ReactDOMRe.Style.t,
+    muiPaper: PaperClassKey.t,
     [@bs.optional] [@bs.as "MuiPopover"]
-    muiPopover: ReactDOMRe.Style.t,
+    muiPopover: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiRadio"]
-    muiRadio: ReactDOMRe.Style.t,
+    muiRadio: RadioClassKey.t,
     [@bs.optional] [@bs.as "MuiSelect"]
-    muiSelect: ReactDOMRe.Style.t,
+    muiSelect: NativeSelectClassKey.t,
     [@bs.optional] [@bs.as "MuiSnackbar"]
-    muiSnackbar: ReactDOMRe.Style.t,
+    muiSnackbar: SnackbarClassKey.t,
     [@bs.optional] [@bs.as "MuiSnackbarContent"]
-    muiSnackbarContent: ReactDOMRe.Style.t,
+    muiSnackbarContent: SnackbarContentClassKey.t,
     [@bs.optional] [@bs.as "MuiStep"]
-    muiStep: ReactDOMRe.Style.t,
+    muiStep: StepperClasskey.t,
     [@bs.optional] [@bs.as "MuiStepButton"]
-    muiStepButton: ReactDOMRe.Style.t,
+    muiStepButton: StepButtonClasskey.t,
     [@bs.optional] [@bs.as "MuiStepConnector"]
-    muiStepConnector: ReactDOMRe.Style.t,
+    muiStepConnector: StepConnectorClasskey.t,
     [@bs.optional] [@bs.as "MuiStepContent"]
-    muiStepContent: ReactDOMRe.Style.t,
+    muiStepContent: StepContentClasskey.t,
     [@bs.optional] [@bs.as "MuiStepIcon"]
-    muiStepIcon: ReactDOMRe.Style.t,
+    muiStepIcon: StepIconClasskey.t,
     [@bs.optional] [@bs.as "MuiStepLabel"]
-    muiStepLabel: ReactDOMRe.Style.t,
+    muiStepLabel: StepLabelClasskey.t,
     [@bs.optional] [@bs.as "MuiStepper"]
-    muiStepper: ReactDOMRe.Style.t,
+    muiStepper: StepperClasskey.t,
     [@bs.optional] [@bs.as "MuiSvgIcon"]
-    muiSvgIcon: ReactDOMRe.Style.t,
+    muiSvgIcon: IconClassKey.t,
     [@bs.optional] [@bs.as "MuiSwitch"]
-    muiSwitch: ReactDOMRe.Style.t,
+    muiSwitch: SwitchClassKey.t,
     [@bs.optional] [@bs.as "MuiSwitchBase"]
-    muiSwitchBase: ReactDOMRe.Style.t,
+    muiSwitchBase: SwitchBaseClassKey.t,
     [@bs.optional] [@bs.as "MuiTab"]
-    muiTab: ReactDOMRe.Style.t,
+    muiTab: TabClassKey.t,
     [@bs.optional] [@bs.as "MuiTable"]
-    muiTable: ReactDOMRe.Style.t,
+    muiTable: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiTableBody"]
-    muiTableBody: ReactDOMRe.Style.t,
+    muiTableBody: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiTableCell"]
-    muiTableCell: ReactDOMRe.Style.t,
+    muiTableCell: TableCellClassKey.t,
     [@bs.optional] [@bs.as "MuiTableFooter"]
-    muiTableFooter: ReactDOMRe.Style.t,
+    muiTableFooter: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiTableHead"]
-    muiTableHead: ReactDOMRe.Style.t,
+    muiTableHead: CSSProperties.t,
     [@bs.optional] [@bs.as "MuiTablePagination"]
-    muiTablePagination: ReactDOMRe.Style.t,
+    muiTablePagination: TablePaginationClassKey.t,
     [@bs.optional] [@bs.as "MuiTableRow"]
-    muiTableRow: ReactDOMRe.Style.t,
+    muiTableRow: TableRowClassKey.t,
     [@bs.optional] [@bs.as "MuiTableSortLabel"]
-    muiTableSortLabel: ReactDOMRe.Style.t,
+    muiTableSortLabel: TableSortLabelClassKey.t,
     [@bs.optional] [@bs.as "MuiTabs"]
-    muiTabs: ReactDOMRe.Style.t,
+    muiTabs: TabsClassKey.t,
     [@bs.optional] [@bs.as "MuiToolbar"]
-    muiToolbar: ReactDOMRe.Style.t,
+    muiToolbar: ToolbarClassKey.t,
     [@bs.optional] [@bs.as "MuiTooltip"]
-    muiTooltip: ReactDOMRe.Style.t,
+    muiTooltip: TooltipClassKey.t,
     [@bs.optional] [@bs.as "MuiTouchRipple"]
-    muiTouchRipple: ReactDOMRe.Style.t,
+    muiTouchRipple: TouchRippleClassKey.t,
     [@bs.optional] [@bs.as "MuiTypography"]
-    muiTypography: ReactDOMRe.Style.t,
+    muiTypography: TypographyClassKey.t,
   };
 
   let make = t;
@@ -245,17 +1959,17 @@ module Overrides = {
 module TypeAction = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "active"]
+    [@bs.as "active"]
     active: string,
-    [@bs.optional] [@bs.as "disabled"]
+    [@bs.as "disabled"]
     disabled: string,
-    [@bs.optional] [@bs.as "disabledBackground"]
+    [@bs.as "disabledBackground"]
     disabledBackground: string,
-    [@bs.optional] [@bs.as "hover"]
+    [@bs.as "hover"]
     hover: string,
-    [@bs.optional] [@bs.as "hoverOpacity"]
+    [@bs.as "hoverOpacity"]
     hoverOpacity: float,
-    [@bs.optional] [@bs.as "selected"]
+    [@bs.as "selected"]
     selected: string,
   };
 
@@ -265,9 +1979,9 @@ module TypeAction = {
 module TypeBackground = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "default"]
+    [@bs.as "default"]
     default: string,
-    [@bs.optional] [@bs.as "paper"]
+    [@bs.as "paper"]
     paper: string,
   };
 
@@ -277,51 +1991,23 @@ module TypeBackground = {
 module CommonColors = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "black"]
+    [@bs.as "black"]
     black: string,
-    [@bs.optional] [@bs.as "white"]
+    [@bs.as "white"]
     white: string,
   };
 
   let make = t;
 };
 
-module Error = {
+module PaletteColor = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "50"]
-    _50: string,
-    [@bs.optional] [@bs.as "100"]
-    _100: string,
-    [@bs.optional] [@bs.as "200"]
-    _200: string,
-    [@bs.optional] [@bs.as "300"]
-    _300: string,
-    [@bs.optional] [@bs.as "400"]
-    _400: string,
-    [@bs.optional] [@bs.as "500"]
-    _500: string,
-    [@bs.optional] [@bs.as "600"]
-    _600: string,
-    [@bs.optional] [@bs.as "700"]
-    _700: string,
-    [@bs.optional] [@bs.as "800"]
-    _800: string,
-    [@bs.optional] [@bs.as "900"]
-    _900: string,
-    [@bs.optional] [@bs.as "A100"]
-    a100: string,
-    [@bs.optional] [@bs.as "A200"]
-    a200: string,
-    [@bs.optional] [@bs.as "A400"]
-    a400: string,
-    [@bs.optional] [@bs.as "A700"]
-    a700: string,
-    [@bs.optional] [@bs.as "contrastText"]
+    [@bs.as "contrastText"]
     contrastText: string,
-    [@bs.optional] [@bs.as "dark"]
+    [@bs.as "dark"]
     dark: string,
-    [@bs.optional] [@bs.as "light"]
+    [@bs.as "light"]
     light: string,
     [@bs.as "main"]
     main: string,
@@ -333,122 +2019,34 @@ module Error = {
 module Color = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "50"]
+    [@bs.as "50"]
     _50: string,
-    [@bs.optional] [@bs.as "100"]
+    [@bs.as "100"]
     _100: string,
-    [@bs.optional] [@bs.as "200"]
+    [@bs.as "200"]
     _200: string,
-    [@bs.optional] [@bs.as "300"]
+    [@bs.as "300"]
     _300: string,
-    [@bs.optional] [@bs.as "400"]
+    [@bs.as "400"]
     _400: string,
-    [@bs.optional] [@bs.as "500"]
+    [@bs.as "500"]
     _500: string,
-    [@bs.optional] [@bs.as "600"]
+    [@bs.as "600"]
     _600: string,
-    [@bs.optional] [@bs.as "700"]
+    [@bs.as "700"]
     _700: string,
-    [@bs.optional] [@bs.as "800"]
+    [@bs.as "800"]
     _800: string,
-    [@bs.optional] [@bs.as "900"]
+    [@bs.as "900"]
     _900: string,
-    [@bs.optional] [@bs.as "A100"]
+    [@bs.as "A100"]
     a100: string,
-    [@bs.optional] [@bs.as "A200"]
+    [@bs.as "A200"]
     a200: string,
-    [@bs.optional] [@bs.as "A400"]
+    [@bs.as "A400"]
     a400: string,
-    [@bs.optional] [@bs.as "A700"]
+    [@bs.as "A700"]
     a700: string,
-  };
-
-  let make = t;
-};
-
-module Primary = {
-  [@bs.deriving abstract]
-  type t = {
-    [@bs.optional] [@bs.as "50"]
-    _50: string,
-    [@bs.optional] [@bs.as "100"]
-    _100: string,
-    [@bs.optional] [@bs.as "200"]
-    _200: string,
-    [@bs.optional] [@bs.as "300"]
-    _300: string,
-    [@bs.optional] [@bs.as "400"]
-    _400: string,
-    [@bs.optional] [@bs.as "500"]
-    _500: string,
-    [@bs.optional] [@bs.as "600"]
-    _600: string,
-    [@bs.optional] [@bs.as "700"]
-    _700: string,
-    [@bs.optional] [@bs.as "800"]
-    _800: string,
-    [@bs.optional] [@bs.as "900"]
-    _900: string,
-    [@bs.optional] [@bs.as "A100"]
-    a100: string,
-    [@bs.optional] [@bs.as "A200"]
-    a200: string,
-    [@bs.optional] [@bs.as "A400"]
-    a400: string,
-    [@bs.optional] [@bs.as "A700"]
-    a700: string,
-    [@bs.optional] [@bs.as "contrastText"]
-    contrastText: string,
-    [@bs.optional] [@bs.as "dark"]
-    dark: string,
-    [@bs.optional] [@bs.as "light"]
-    light: string,
-    [@bs.as "main"]
-    main: string,
-  };
-
-  let make = t;
-};
-
-module Secondary = {
-  [@bs.deriving abstract]
-  type t = {
-    [@bs.optional] [@bs.as "50"]
-    _50: string,
-    [@bs.optional] [@bs.as "100"]
-    _100: string,
-    [@bs.optional] [@bs.as "200"]
-    _200: string,
-    [@bs.optional] [@bs.as "300"]
-    _300: string,
-    [@bs.optional] [@bs.as "400"]
-    _400: string,
-    [@bs.optional] [@bs.as "500"]
-    _500: string,
-    [@bs.optional] [@bs.as "600"]
-    _600: string,
-    [@bs.optional] [@bs.as "700"]
-    _700: string,
-    [@bs.optional] [@bs.as "800"]
-    _800: string,
-    [@bs.optional] [@bs.as "900"]
-    _900: string,
-    [@bs.optional] [@bs.as "A100"]
-    a100: string,
-    [@bs.optional] [@bs.as "A200"]
-    a200: string,
-    [@bs.optional] [@bs.as "A400"]
-    a400: string,
-    [@bs.optional] [@bs.as "A700"]
-    a700: string,
-    [@bs.optional] [@bs.as "contrastText"]
-    contrastText: string,
-    [@bs.optional] [@bs.as "dark"]
-    dark: string,
-    [@bs.optional] [@bs.as "light"]
-    light: string,
-    [@bs.as "main"]
-    main: string,
   };
 
   let make = t;
@@ -457,47 +2055,49 @@ module Secondary = {
 module TypeText = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "disabled"]
+    [@bs.as "disabled"]
     disabled: string,
-    [@bs.optional] [@bs.as "hint"]
+    [@bs.as "hint"]
     hint: string,
-    [@bs.optional] [@bs.as "primary"]
+    [@bs.as "primary"]
     primary: string,
-    [@bs.optional] [@bs.as "secondary"]
+    [@bs.as "secondary"]
     secondary: string,
   };
 
   let make = t;
 };
 
-module PaletteOptions = {
+module Palette = {
   [@bs.deriving abstract]
-  type t('getContrastText) = {
-    [@bs.optional] [@bs.as "action"]
+  type t = {
+    [@bs.as "action"]
     action: TypeAction.t,
-    [@bs.optional] [@bs.as "background"]
+    [@bs.as "augmentColor"]
+    augmentColor: Js.Json.t,
+    [@bs.as "background"]
     background: TypeBackground.t,
-    [@bs.optional] [@bs.as "common"]
+    [@bs.as "common"]
     common: CommonColors.t,
-    [@bs.optional] [@bs.as "contrastThreshold"]
+    [@bs.as "contrastThreshold"]
     contrastThreshold: float,
-    [@bs.optional] [@bs.as "divider"]
+    [@bs.as "divider"]
     divider: string,
-    [@bs.optional] [@bs.as "error"]
-    error: Error.t,
-    [@bs.optional] [@bs.as "getContrastText"]
-    getContrastText: Js.t('getContrastText),
-    [@bs.optional] [@bs.as "grey"]
+    [@bs.as "error"]
+    error: PaletteColor.t,
+    [@bs.as "getContrastText"]
+    getContrastText: Js.Json.t,
+    [@bs.as "grey"]
     grey: Color.t,
-    [@bs.optional] [@bs.as "primary"]
-    primary: Primary.t,
-    [@bs.optional] [@bs.as "secondary"]
-    secondary: Secondary.t,
-    [@bs.optional] [@bs.as "text"]
+    [@bs.as "primary"]
+    primary: PaletteColor.t,
+    [@bs.as "secondary"]
+    secondary: PaletteColor.t,
+    [@bs.as "text"]
     text: TypeText.t,
-    [@bs.optional] [@bs.as "tonalOffset"]
+    [@bs.as "tonalOffset"]
     tonalOffset: float,
-    [@bs.optional] [@bs.as "type"]
+    [@bs.as "type"]
     type_: string,
   };
 
@@ -506,257 +2106,173 @@ module PaletteOptions = {
 
 module ComponentsProps = {
   [@bs.deriving abstract]
-  type t(
-    'muiAppBar,
-    'muiAvatar,
-    'muiBackdrop,
-    'muiBadge,
-    'muiBottomNavigation,
-    'muiBottomNavigationAction,
-    'muiButton,
-    'muiButtonBase,
-    'muiCard,
-    'muiCardActions,
-    'muiCardContent,
-    'muiCardHeader,
-    'muiCardMedia,
-    'muiCheckbox,
-    'muiChip,
-    'muiCircularProgress,
-    'muiCollapse,
-    'muiCssBaseline,
-    'muiDialog,
-    'muiDialogActions,
-    'muiDialogContent,
-    'muiDialogContentText,
-    'muiDialogTitle,
-    'muiDivider,
-    'muiDrawer,
-    'muiExpansionPanel,
-    'muiExpansionPanelActions,
-    'muiExpansionPanelDetails,
-    'muiExpansionPanelSummary,
-    'muiFormControl,
-    'muiFormControlLabel,
-    'muiFormGroup,
-    'muiFormHelperText,
-    'muiFormLabel,
-    'muiGrid,
-    'muiGridList,
-    'muiGridListTile,
-    'muiGridListTileBar,
-    'muiIcon,
-    'muiIconButton,
-    'muiInput,
-    'muiInputAdornment,
-    'muiInputLabel,
-    'muiLinearProgress,
-    'muiList,
-    'muiListItem,
-    'muiListItemAvatar,
-    'muiListItemIcon,
-    'muiListItemSecondaryAction,
-    'muiListItemText,
-    'muiListSubheader,
-    'muiMenu,
-    'muiMenuItem,
-    'muiMobileStepper,
-    'muiModal,
-    'muiNativeSelect,
-    'muiPaper,
-    'muiPopover,
-    'muiRadio,
-    'muiSelect,
-    'muiSnackbar,
-    'muiSnackbarContent,
-    'muiStep,
-    'muiStepButton,
-    'muiStepConnector,
-    'muiStepContent,
-    'muiStepIcon,
-    'muiStepLabel,
-    'muiStepper,
-    'muiSvgIcon,
-    'muiSwitch,
-    'muiSwitchBase,
-    'muiTab,
-    'muiTable,
-    'muiTableCell,
-    'muiTablePagination,
-    'muiTableRow,
-    'muiTableSortLabel,
-    'muiTabs,
-    'muiToolbar,
-    'muiTooltip,
-    'muiTouchRipple,
-    'muiTypography,
-  ) = {
+  type t = {
     [@bs.optional] [@bs.as "MuiAppBar"]
-    muiAppBar: Js.t('muiAppBar),
+    muiAppBar: Js.Json.t,
     [@bs.optional] [@bs.as "MuiAvatar"]
-    muiAvatar: Js.t('muiAvatar),
+    muiAvatar: Js.Json.t,
     [@bs.optional] [@bs.as "MuiBackdrop"]
-    muiBackdrop: Js.t('muiBackdrop),
+    muiBackdrop: Js.Json.t,
     [@bs.optional] [@bs.as "MuiBadge"]
-    muiBadge: Js.t('muiBadge),
+    muiBadge: Js.Json.t,
     [@bs.optional] [@bs.as "MuiBottomNavigation"]
-    muiBottomNavigation: Js.t('muiBottomNavigation),
+    muiBottomNavigation: Js.Json.t,
     [@bs.optional] [@bs.as "MuiBottomNavigationAction"]
-    muiBottomNavigationAction: Js.t('muiBottomNavigationAction),
+    muiBottomNavigationAction: Js.Json.t,
     [@bs.optional] [@bs.as "MuiButton"]
-    muiButton: Js.t('muiButton),
+    muiButton: Js.Json.t,
     [@bs.optional] [@bs.as "MuiButtonBase"]
-    muiButtonBase: Js.t('muiButtonBase),
+    muiButtonBase: Js.Json.t,
     [@bs.optional] [@bs.as "MuiCard"]
-    muiCard: Js.t('muiCard),
+    muiCard: Js.Json.t,
     [@bs.optional] [@bs.as "MuiCardActions"]
-    muiCardActions: Js.t('muiCardActions),
+    muiCardActions: Js.Json.t,
     [@bs.optional] [@bs.as "MuiCardContent"]
-    muiCardContent: Js.t('muiCardContent),
+    muiCardContent: Js.Json.t,
     [@bs.optional] [@bs.as "MuiCardHeader"]
-    muiCardHeader: Js.t('muiCardHeader),
+    muiCardHeader: Js.Json.t,
     [@bs.optional] [@bs.as "MuiCardMedia"]
-    muiCardMedia: Js.t('muiCardMedia),
+    muiCardMedia: Js.Json.t,
     [@bs.optional] [@bs.as "MuiCheckbox"]
-    muiCheckbox: Js.t('muiCheckbox),
+    muiCheckbox: Js.Json.t,
     [@bs.optional] [@bs.as "MuiChip"]
-    muiChip: Js.t('muiChip),
+    muiChip: Js.Json.t,
     [@bs.optional] [@bs.as "MuiCircularProgress"]
-    muiCircularProgress: Js.t('muiCircularProgress),
+    muiCircularProgress: Js.Json.t,
     [@bs.optional] [@bs.as "MuiCollapse"]
-    muiCollapse: Js.t('muiCollapse),
+    muiCollapse: Js.Json.t,
     [@bs.optional] [@bs.as "MuiCssBaseline"]
-    muiCssBaseline: Js.t('muiCssBaseline),
+    muiCssBaseline: Js.Json.t,
     [@bs.optional] [@bs.as "MuiDialog"]
-    muiDialog: Js.t('muiDialog),
+    muiDialog: Js.Json.t,
     [@bs.optional] [@bs.as "MuiDialogActions"]
-    muiDialogActions: Js.t('muiDialogActions),
+    muiDialogActions: Js.Json.t,
     [@bs.optional] [@bs.as "MuiDialogContent"]
-    muiDialogContent: Js.t('muiDialogContent),
+    muiDialogContent: Js.Json.t,
     [@bs.optional] [@bs.as "MuiDialogContentText"]
-    muiDialogContentText: Js.t('muiDialogContentText),
+    muiDialogContentText: Js.Json.t,
     [@bs.optional] [@bs.as "MuiDialogTitle"]
-    muiDialogTitle: Js.t('muiDialogTitle),
+    muiDialogTitle: Js.Json.t,
     [@bs.optional] [@bs.as "MuiDivider"]
-    muiDivider: Js.t('muiDivider),
+    muiDivider: Js.Json.t,
     [@bs.optional] [@bs.as "MuiDrawer"]
-    muiDrawer: Js.t('muiDrawer),
+    muiDrawer: Js.Json.t,
     [@bs.optional] [@bs.as "MuiExpansionPanel"]
-    muiExpansionPanel: Js.t('muiExpansionPanel),
+    muiExpansionPanel: Js.Json.t,
     [@bs.optional] [@bs.as "MuiExpansionPanelActions"]
-    muiExpansionPanelActions: Js.t('muiExpansionPanelActions),
+    muiExpansionPanelActions: Js.Json.t,
     [@bs.optional] [@bs.as "MuiExpansionPanelDetails"]
-    muiExpansionPanelDetails: Js.t('muiExpansionPanelDetails),
+    muiExpansionPanelDetails: Js.Json.t,
     [@bs.optional] [@bs.as "MuiExpansionPanelSummary"]
-    muiExpansionPanelSummary: Js.t('muiExpansionPanelSummary),
+    muiExpansionPanelSummary: Js.Json.t,
     [@bs.optional] [@bs.as "MuiFormControl"]
-    muiFormControl: Js.t('muiFormControl),
+    muiFormControl: Js.Json.t,
     [@bs.optional] [@bs.as "MuiFormControlLabel"]
-    muiFormControlLabel: Js.t('muiFormControlLabel),
+    muiFormControlLabel: Js.Json.t,
     [@bs.optional] [@bs.as "MuiFormGroup"]
-    muiFormGroup: Js.t('muiFormGroup),
+    muiFormGroup: Js.Json.t,
     [@bs.optional] [@bs.as "MuiFormHelperText"]
-    muiFormHelperText: Js.t('muiFormHelperText),
+    muiFormHelperText: Js.Json.t,
     [@bs.optional] [@bs.as "MuiFormLabel"]
-    muiFormLabel: Js.t('muiFormLabel),
+    muiFormLabel: Js.Json.t,
     [@bs.optional] [@bs.as "MuiGrid"]
-    muiGrid: Js.t('muiGrid),
+    muiGrid: Js.Json.t,
     [@bs.optional] [@bs.as "MuiGridList"]
-    muiGridList: Js.t('muiGridList),
+    muiGridList: Js.Json.t,
     [@bs.optional] [@bs.as "MuiGridListTile"]
-    muiGridListTile: Js.t('muiGridListTile),
+    muiGridListTile: Js.Json.t,
     [@bs.optional] [@bs.as "MuiGridListTileBar"]
-    muiGridListTileBar: Js.t('muiGridListTileBar),
+    muiGridListTileBar: Js.Json.t,
     [@bs.optional] [@bs.as "MuiIcon"]
-    muiIcon: Js.t('muiIcon),
+    muiIcon: Js.Json.t,
     [@bs.optional] [@bs.as "MuiIconButton"]
-    muiIconButton: Js.t('muiIconButton),
+    muiIconButton: Js.Json.t,
     [@bs.optional] [@bs.as "MuiInput"]
-    muiInput: Js.t('muiInput),
+    muiInput: Js.Json.t,
     [@bs.optional] [@bs.as "MuiInputAdornment"]
-    muiInputAdornment: Js.t('muiInputAdornment),
+    muiInputAdornment: Js.Json.t,
     [@bs.optional] [@bs.as "MuiInputLabel"]
-    muiInputLabel: Js.t('muiInputLabel),
+    muiInputLabel: Js.Json.t,
     [@bs.optional] [@bs.as "MuiLinearProgress"]
-    muiLinearProgress: Js.t('muiLinearProgress),
+    muiLinearProgress: Js.Json.t,
     [@bs.optional] [@bs.as "MuiList"]
-    muiList: Js.t('muiList),
+    muiList: Js.Json.t,
     [@bs.optional] [@bs.as "MuiListItem"]
-    muiListItem: Js.t('muiListItem),
+    muiListItem: Js.Json.t,
     [@bs.optional] [@bs.as "MuiListItemAvatar"]
-    muiListItemAvatar: Js.t('muiListItemAvatar),
+    muiListItemAvatar: Js.Json.t,
     [@bs.optional] [@bs.as "MuiListItemIcon"]
-    muiListItemIcon: Js.t('muiListItemIcon),
+    muiListItemIcon: Js.Json.t,
     [@bs.optional] [@bs.as "MuiListItemSecondaryAction"]
-    muiListItemSecondaryAction: Js.t('muiListItemSecondaryAction),
+    muiListItemSecondaryAction: Js.Json.t,
     [@bs.optional] [@bs.as "MuiListItemText"]
-    muiListItemText: Js.t('muiListItemText),
+    muiListItemText: Js.Json.t,
     [@bs.optional] [@bs.as "MuiListSubheader"]
-    muiListSubheader: Js.t('muiListSubheader),
+    muiListSubheader: Js.Json.t,
     [@bs.optional] [@bs.as "MuiMenu"]
-    muiMenu: Js.t('muiMenu),
+    muiMenu: Js.Json.t,
     [@bs.optional] [@bs.as "MuiMenuItem"]
-    muiMenuItem: Js.t('muiMenuItem),
+    muiMenuItem: Js.Json.t,
     [@bs.optional] [@bs.as "MuiMobileStepper"]
-    muiMobileStepper: Js.t('muiMobileStepper),
+    muiMobileStepper: Js.Json.t,
     [@bs.optional] [@bs.as "MuiModal"]
-    muiModal: Js.t('muiModal),
+    muiModal: Js.Json.t,
     [@bs.optional] [@bs.as "MuiNativeSelect"]
-    muiNativeSelect: Js.t('muiNativeSelect),
+    muiNativeSelect: Js.Json.t,
     [@bs.optional] [@bs.as "MuiPaper"]
-    muiPaper: Js.t('muiPaper),
+    muiPaper: Js.Json.t,
     [@bs.optional] [@bs.as "MuiPopover"]
-    muiPopover: Js.t('muiPopover),
+    muiPopover: Js.Json.t,
     [@bs.optional] [@bs.as "MuiRadio"]
-    muiRadio: Js.t('muiRadio),
+    muiRadio: Js.Json.t,
     [@bs.optional] [@bs.as "MuiSelect"]
-    muiSelect: Js.t('muiSelect),
+    muiSelect: Js.Json.t,
     [@bs.optional] [@bs.as "MuiSnackbar"]
-    muiSnackbar: Js.t('muiSnackbar),
+    muiSnackbar: Js.Json.t,
     [@bs.optional] [@bs.as "MuiSnackbarContent"]
-    muiSnackbarContent: Js.t('muiSnackbarContent),
+    muiSnackbarContent: Js.Json.t,
     [@bs.optional] [@bs.as "MuiStep"]
-    muiStep: Js.t('muiStep),
+    muiStep: Js.Json.t,
     [@bs.optional] [@bs.as "MuiStepButton"]
-    muiStepButton: Js.t('muiStepButton),
+    muiStepButton: Js.Json.t,
     [@bs.optional] [@bs.as "MuiStepConnector"]
-    muiStepConnector: Js.t('muiStepConnector),
+    muiStepConnector: Js.Json.t,
     [@bs.optional] [@bs.as "MuiStepContent"]
-    muiStepContent: Js.t('muiStepContent),
+    muiStepContent: Js.Json.t,
     [@bs.optional] [@bs.as "MuiStepIcon"]
-    muiStepIcon: Js.t('muiStepIcon),
+    muiStepIcon: Js.Json.t,
     [@bs.optional] [@bs.as "MuiStepLabel"]
-    muiStepLabel: Js.t('muiStepLabel),
+    muiStepLabel: Js.Json.t,
     [@bs.optional] [@bs.as "MuiStepper"]
-    muiStepper: Js.t('muiStepper),
+    muiStepper: Js.Json.t,
     [@bs.optional] [@bs.as "MuiSvgIcon"]
-    muiSvgIcon: Js.t('muiSvgIcon),
+    muiSvgIcon: Js.Json.t,
     [@bs.optional] [@bs.as "MuiSwitch"]
-    muiSwitch: Js.t('muiSwitch),
+    muiSwitch: Js.Json.t,
     [@bs.optional] [@bs.as "MuiSwitchBase"]
-    muiSwitchBase: Js.t('muiSwitchBase),
+    muiSwitchBase: Js.Json.t,
     [@bs.optional] [@bs.as "MuiTab"]
-    muiTab: Js.t('muiTab),
+    muiTab: Js.Json.t,
     [@bs.optional] [@bs.as "MuiTable"]
-    muiTable: Js.t('muiTable),
+    muiTable: Js.Json.t,
     [@bs.optional] [@bs.as "MuiTableCell"]
-    muiTableCell: Js.t('muiTableCell),
+    muiTableCell: Js.Json.t,
     [@bs.optional] [@bs.as "MuiTablePagination"]
-    muiTablePagination: Js.t('muiTablePagination),
+    muiTablePagination: Js.Json.t,
     [@bs.optional] [@bs.as "MuiTableRow"]
-    muiTableRow: Js.t('muiTableRow),
+    muiTableRow: Js.Json.t,
     [@bs.optional] [@bs.as "MuiTableSortLabel"]
-    muiTableSortLabel: Js.t('muiTableSortLabel),
+    muiTableSortLabel: Js.Json.t,
     [@bs.optional] [@bs.as "MuiTabs"]
-    muiTabs: Js.t('muiTabs),
+    muiTabs: Js.Json.t,
     [@bs.optional] [@bs.as "MuiToolbar"]
-    muiToolbar: Js.t('muiToolbar),
+    muiToolbar: Js.Json.t,
     [@bs.optional] [@bs.as "MuiTooltip"]
-    muiTooltip: Js.t('muiTooltip),
+    muiTooltip: Js.Json.t,
     [@bs.optional] [@bs.as "MuiTouchRipple"]
-    muiTouchRipple: Js.t('muiTouchRipple),
+    muiTouchRipple: Js.Json.t,
     [@bs.optional] [@bs.as "MuiTypography"]
-    muiTypography: Js.t('muiTypography),
+    muiTypography: Js.Json.t,
   };
 
   let make = t;
@@ -765,7 +2281,7 @@ module ComponentsProps = {
 module Shape = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "borderRadius"]
+    [@bs.as "borderRadius"]
     borderRadius: float,
   };
 
@@ -775,7 +2291,7 @@ module Shape = {
 module Spacing = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "unit"]
+    [@bs.as "unit"]
     unit: float,
   };
 
@@ -785,19 +2301,19 @@ module Spacing = {
 module Duration = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "complex"]
+    [@bs.as "complex"]
     complex: float,
-    [@bs.optional] [@bs.as "enteringScreen"]
+    [@bs.as "enteringScreen"]
     enteringScreen: float,
-    [@bs.optional] [@bs.as "leavingScreen"]
+    [@bs.as "leavingScreen"]
     leavingScreen: float,
-    [@bs.optional] [@bs.as "short"]
+    [@bs.as "short"]
     short: float,
-    [@bs.optional] [@bs.as "shorter"]
+    [@bs.as "shorter"]
     shorter: float,
-    [@bs.optional] [@bs.as "shortest"]
+    [@bs.as "shortest"]
     shortest: float,
-    [@bs.optional] [@bs.as "standard"]
+    [@bs.as "standard"]
     standard: float,
   };
 
@@ -807,45 +2323,41 @@ module Duration = {
 module Easing = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "easeIn"]
+    [@bs.as "easeIn"]
     easeIn: string,
-    [@bs.optional] [@bs.as "easeInOut"]
+    [@bs.as "easeInOut"]
     easeInOut: string,
-    [@bs.optional] [@bs.as "easeOut"]
+    [@bs.as "easeOut"]
     easeOut: string,
-    [@bs.optional] [@bs.as "sharp"]
+    [@bs.as "sharp"]
     sharp: string,
   };
 
   let make = t;
 };
 
-module TransitionsOptions = {
+module Transitions = {
   [@bs.deriving abstract]
-  type t('create, 'getAutoHeightDuration) = {
-    [@bs.optional] [@bs.as "create"]
-    create: Js.t('create),
-    [@bs.optional] [@bs.as "duration"]
+  type t = {
+    [@bs.as "duration"]
     duration: Duration.t,
-    [@bs.optional] [@bs.as "easing"]
+    [@bs.as "easing"]
     easing: Easing.t,
-    [@bs.optional] [@bs.as "getAutoHeightDuration"]
-    getAutoHeightDuration: Js.t('getAutoHeightDuration),
   };
 
   let make = t;
 };
 
-module TypographyStyleOptions = {
+module Body1 = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "color"]
+    [@bs.as "color"]
     color: string,
-    [@bs.optional] [@bs.as "fontFamily"]
+    [@bs.as "fontFamily"]
     fontFamily: string,
-    [@bs.optional] [@bs.as "fontSize"]
+    [@bs.as "fontSize"]
     fontSize: string,
-    [@bs.optional] [@bs.as "fontWeight"]
+    [@bs.as "fontWeight"]
     fontWeight: string,
     [@bs.optional] [@bs.as "letterSpacing"]
     letterSpacing: string,
@@ -872,12 +2384,10 @@ module TypographyStyleOptions = {
             |}
     ];
 
-    fontSizeGet(value)
-    ->Belt.Option.map(v =>
-        isNumeric(v) ?
-          `Float(Obj.magic(v)) :
-          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
-      );
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
   };
 
   [@bs.deriving jsConverter]
@@ -902,7 +2412,2249 @@ module TypographyStyleOptions = {
     | [@bs.as "unset"] `Unset
   ];
   let fontWeightGet = value =>
-    fontWeightGet(value)->Belt.Option.map(v => fontWeightConverterFromJs(v));
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Body2 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Button = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Caption = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Display1 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Display2 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Display3 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Display4 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module H1 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module H2 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module H3 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module H4 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module H5 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module H6 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Headline = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Overline = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Subheading = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Subtitle1 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Subtitle2 = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
+
+  let letterSpacingGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    letterSpacingGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+  let lineHeightGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    lineHeightGet(value)
+    ->Belt.Option.map(v =>
+        isNumeric(v) ?
+          `Float(Obj.magic(v)) :
+          isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v))
+      );
+  };
+
+  let make = t;
+};
+
+module Title = {
+  [@bs.deriving abstract]
+  type t = {
+    [@bs.as "color"]
+    color: string,
+    [@bs.as "fontFamily"]
+    fontFamily: string,
+    [@bs.as "fontSize"]
+    fontSize: string,
+    [@bs.as "fontWeight"]
+    fontWeight: string,
+    [@bs.optional] [@bs.as "letterSpacing"]
+    letterSpacing: string,
+    [@bs.optional] [@bs.as "lineHeight"]
+    lineHeight: string,
+    [@bs.optional] [@bs.as "textTransform"]
+    textTransform: string,
+  };
+
+  let fontSizeGet = value => {
+    let isNumeric: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    var realStringObj = obj && obj.toString();
+                    return typeof obj !== 'object' && (realStringObj - parseFloat(realStringObj) + 1) >= 0;
+                }
+            |}
+    ];
+    let isBool: 'a => bool = [%raw
+      {|
+                function(obj) {
+                    return typeof obj === 'boolean';
+                }
+            |}
+    ];
+
+    let v = fontSizeGet(value);
+    isNumeric(v) ?
+      `Float(Obj.magic(v)) :
+      isBool(v) ? `Bool(Obj.magic(v)) : `String(Obj.magic(v));
+  };
+
+  [@bs.deriving jsConverter]
+  type fontWeightConverter = [
+    | [@bs.as "-moz-initial"] `MozInitial
+    | [@bs.as "100"] `V100
+    | [@bs.as "200"] `V200
+    | [@bs.as "300"] `V300
+    | [@bs.as "400"] `V400
+    | [@bs.as "500"] `V500
+    | [@bs.as "600"] `V600
+    | [@bs.as "700"] `V700
+    | [@bs.as "800"] `V800
+    | [@bs.as "900"] `V900
+    | [@bs.as "bold"] `Bold
+    | [@bs.as "bolder"] `Bolder
+    | [@bs.as "inherit"] `Inherit
+    | [@bs.as "initial"] `Initial
+    | [@bs.as "lighter"] `Lighter
+    | [@bs.as "normal"] `Normal
+    | [@bs.as "revert"] `Revert
+    | [@bs.as "unset"] `Unset
+  ];
+  let fontWeightGet = value =>
+    fontWeightGet(value)->fontWeightConverterFromJs;
 
   let letterSpacingGet = value => {
     let isNumeric: 'a => bool = [%raw
@@ -958,48 +4710,26 @@ module TypographyStyleOptions = {
 
 module Typography = {
   [@bs.deriving abstract]
-  type t(
-    'body2,
-    'button,
-    'caption,
-    'display1,
-    'display2,
-    'display3,
-    'display4,
-    'h1,
-    'h2,
-    'h3,
-    'h4,
-    'h5,
-    'h6,
-    'headline,
-    'overline,
-    'subheading,
-    'subtitle1,
-    'subtitle2,
-    'title,
-  ) = {
-    [@bs.optional] [@bs.as "allVariants"]
-    allVariants: ReactDOMRe.Style.t,
-    [@bs.optional] [@bs.as "body1"]
-    body1: TypographyStyleOptions.t,
-    [@bs.optional] [@bs.as "body2"]
-    body2: Js.t('body2),
-    [@bs.optional] [@bs.as "button"]
-    button: Js.t('button),
-    [@bs.optional] [@bs.as "caption"]
-    caption: Js.t('caption),
-    [@bs.optional] [@bs.as "display1"]
-    display1: Js.t('display1),
-    [@bs.optional] [@bs.as "display2"]
-    display2: Js.t('display2),
-    [@bs.optional] [@bs.as "display3"]
-    display3: Js.t('display3),
-    [@bs.optional] [@bs.as "display4"]
-    display4: Js.t('display4),
+  type t = {
+    [@bs.as "body1"]
+    body1: Body1.t,
+    [@bs.as "body2"]
+    body2: Body2.t,
+    [@bs.as "button"]
+    button: Button.t,
+    [@bs.as "caption"]
+    caption: Caption.t,
+    [@bs.as "display1"]
+    display1: Display1.t,
+    [@bs.as "display2"]
+    display2: Display2.t,
+    [@bs.as "display3"]
+    display3: Display3.t,
+    [@bs.as "display4"]
+    display4: Display4.t,
     [@bs.optional] [@bs.as "fontFamily"]
     fontFamily: string,
-    [@bs.optional] [@bs.as "fontSize"]
+    [@bs.as "fontSize"]
     fontSize: float,
     [@bs.optional] [@bs.as "fontWeightLight"]
     fontWeightLight: string,
@@ -1007,34 +4737,32 @@ module Typography = {
     fontWeightMedium: string,
     [@bs.optional] [@bs.as "fontWeightRegular"]
     fontWeightRegular: string,
-    [@bs.optional] [@bs.as "h1"]
-    h1: Js.t('h1),
-    [@bs.optional] [@bs.as "h2"]
-    h2: Js.t('h2),
-    [@bs.optional] [@bs.as "h3"]
-    h3: Js.t('h3),
-    [@bs.optional] [@bs.as "h4"]
-    h4: Js.t('h4),
-    [@bs.optional] [@bs.as "h5"]
-    h5: Js.t('h5),
-    [@bs.optional] [@bs.as "h6"]
-    h6: Js.t('h6),
-    [@bs.optional] [@bs.as "headline"]
-    headline: Js.t('headline),
-    [@bs.optional] [@bs.as "htmlFontSize"]
-    htmlFontSize: float,
-    [@bs.optional] [@bs.as "overline"]
-    overline: Js.t('overline),
-    [@bs.optional] [@bs.as "subheading"]
-    subheading: Js.t('subheading),
-    [@bs.optional] [@bs.as "subtitle1"]
-    subtitle1: Js.t('subtitle1),
-    [@bs.optional] [@bs.as "subtitle2"]
-    subtitle2: Js.t('subtitle2),
-    [@bs.optional] [@bs.as "title"]
-    title: Js.t('title),
-    [@bs.optional] [@bs.as "useNextVariants"]
-    useNextVariants: bool,
+    [@bs.as "h1"]
+    h1: H1.t,
+    [@bs.as "h2"]
+    h2: H2.t,
+    [@bs.as "h3"]
+    h3: H3.t,
+    [@bs.as "h4"]
+    h4: H4.t,
+    [@bs.as "h5"]
+    h5: H5.t,
+    [@bs.as "h6"]
+    h6: H6.t,
+    [@bs.as "headline"]
+    headline: Headline.t,
+    [@bs.as "overline"]
+    overline: Overline.t,
+    [@bs.as "pxToRem"]
+    pxToRem: Js.Json.t,
+    [@bs.as "subheading"]
+    subheading: Subheading.t,
+    [@bs.as "subtitle1"]
+    subtitle1: Subtitle1.t,
+    [@bs.as "subtitle2"]
+    subtitle2: Subtitle2.t,
+    [@bs.as "title"]
+    title: Title.t,
   };
 
   [@bs.deriving jsConverter]
@@ -1118,502 +4846,53 @@ module Typography = {
 module ZIndex = {
   [@bs.deriving abstract]
   type t = {
-    [@bs.optional] [@bs.as "appBar"]
+    [@bs.as "appBar"]
     appBar: float,
-    [@bs.optional] [@bs.as "drawer"]
+    [@bs.as "drawer"]
     drawer: float,
-    [@bs.optional] [@bs.as "mobileStepper"]
+    [@bs.as "mobileStepper"]
     mobileStepper: float,
-    [@bs.optional] [@bs.as "modal"]
+    [@bs.as "modal"]
     modal: float,
-    [@bs.optional] [@bs.as "snackbar"]
+    [@bs.as "snackbar"]
     snackbar: float,
-    [@bs.optional] [@bs.as "tooltip"]
+    [@bs.as "tooltip"]
     tooltip: float,
   };
 
   let make = t;
 };
 
-module ThemeOptions = {
+module Theme = {
   [@bs.deriving abstract]
-  type t(
-    'between,
-    'down,
-    'only,
-    'up,
-    'width,
-    'gutters,
-    'getContrastText,
-    'muiAppBar,
-    'muiAvatar,
-    'muiBackdrop,
-    'muiBadge,
-    'muiBottomNavigation,
-    'muiBottomNavigationAction,
-    'muiButton,
-    'muiButtonBase,
-    'muiCard,
-    'muiCardActions,
-    'muiCardContent,
-    'muiCardHeader,
-    'muiCardMedia,
-    'muiCheckbox,
-    'muiChip,
-    'muiCircularProgress,
-    'muiCollapse,
-    'muiCssBaseline,
-    'muiDialog,
-    'muiDialogActions,
-    'muiDialogContent,
-    'muiDialogContentText,
-    'muiDialogTitle,
-    'muiDivider,
-    'muiDrawer,
-    'muiExpansionPanel,
-    'muiExpansionPanelActions,
-    'muiExpansionPanelDetails,
-    'muiExpansionPanelSummary,
-    'muiFormControl,
-    'muiFormControlLabel,
-    'muiFormGroup,
-    'muiFormHelperText,
-    'muiFormLabel,
-    'muiGrid,
-    'muiGridList,
-    'muiGridListTile,
-    'muiGridListTileBar,
-    'muiIcon,
-    'muiIconButton,
-    'muiInput,
-    'muiInputAdornment,
-    'muiInputLabel,
-    'muiLinearProgress,
-    'muiList,
-    'muiListItem,
-    'muiListItemAvatar,
-    'muiListItemIcon,
-    'muiListItemSecondaryAction,
-    'muiListItemText,
-    'muiListSubheader,
-    'muiMenu,
-    'muiMenuItem,
-    'muiMobileStepper,
-    'muiModal,
-    'muiNativeSelect,
-    'muiPaper,
-    'muiPopover,
-    'muiRadio,
-    'muiSelect,
-    'muiSnackbar,
-    'muiSnackbarContent,
-    'muiStep,
-    'muiStepButton,
-    'muiStepConnector,
-    'muiStepContent,
-    'muiStepIcon,
-    'muiStepLabel,
-    'muiStepper,
-    'muiSvgIcon,
-    'muiSwitch,
-    'muiSwitchBase,
-    'muiTab,
-    'muiTable,
-    'muiTableCell,
-    'muiTablePagination,
-    'muiTableRow,
-    'muiTableSortLabel,
-    'muiTabs,
-    'muiToolbar,
-    'muiTooltip,
-    'muiTouchRipple,
-    'muiTypography,
-    'create,
-    'getAutoHeightDuration,
-    'body2,
-    'button,
-    'caption,
-    'display1,
-    'display2,
-    'display3,
-    'display4,
-    'h1,
-    'h2,
-    'h3,
-    'h4,
-    'h5,
-    'h6,
-    'headline,
-    'overline,
-    'subheading,
-    'subtitle1,
-    'subtitle2,
-    'title,
-  ) = {
-    [@bs.optional] [@bs.as "breakpoints"]
-    breakpoints: Breakpoints.t('between, 'down, 'only, 'up, 'width),
-    [@bs.optional] [@bs.as "direction"]
+  type t = {
+    [@bs.as "breakpoints"]
+    breakpoints: Breakpoints.t,
+    [@bs.as "direction"]
     direction: string,
-    [@bs.optional] [@bs.as "mixins"]
-    mixins: MixinsOptions.t('gutters),
+    [@bs.as "mixins"]
+    mixins: Mixins.t,
     [@bs.optional] [@bs.as "overrides"]
     overrides: Overrides.t,
-    [@bs.optional] [@bs.as "palette"]
-    palette: PaletteOptions.t('getContrastText),
+    [@bs.as "palette"]
+    palette: Palette.t,
     [@bs.optional] [@bs.as "props"]
-    props:
-      ComponentsProps.t(
-        'muiAppBar,
-        'muiAvatar,
-        'muiBackdrop,
-        'muiBadge,
-        'muiBottomNavigation,
-        'muiBottomNavigationAction,
-        'muiButton,
-        'muiButtonBase,
-        'muiCard,
-        'muiCardActions,
-        'muiCardContent,
-        'muiCardHeader,
-        'muiCardMedia,
-        'muiCheckbox,
-        'muiChip,
-        'muiCircularProgress,
-        'muiCollapse,
-        'muiCssBaseline,
-        'muiDialog,
-        'muiDialogActions,
-        'muiDialogContent,
-        'muiDialogContentText,
-        'muiDialogTitle,
-        'muiDivider,
-        'muiDrawer,
-        'muiExpansionPanel,
-        'muiExpansionPanelActions,
-        'muiExpansionPanelDetails,
-        'muiExpansionPanelSummary,
-        'muiFormControl,
-        'muiFormControlLabel,
-        'muiFormGroup,
-        'muiFormHelperText,
-        'muiFormLabel,
-        'muiGrid,
-        'muiGridList,
-        'muiGridListTile,
-        'muiGridListTileBar,
-        'muiIcon,
-        'muiIconButton,
-        'muiInput,
-        'muiInputAdornment,
-        'muiInputLabel,
-        'muiLinearProgress,
-        'muiList,
-        'muiListItem,
-        'muiListItemAvatar,
-        'muiListItemIcon,
-        'muiListItemSecondaryAction,
-        'muiListItemText,
-        'muiListSubheader,
-        'muiMenu,
-        'muiMenuItem,
-        'muiMobileStepper,
-        'muiModal,
-        'muiNativeSelect,
-        'muiPaper,
-        'muiPopover,
-        'muiRadio,
-        'muiSelect,
-        'muiSnackbar,
-        'muiSnackbarContent,
-        'muiStep,
-        'muiStepButton,
-        'muiStepConnector,
-        'muiStepContent,
-        'muiStepIcon,
-        'muiStepLabel,
-        'muiStepper,
-        'muiSvgIcon,
-        'muiSwitch,
-        'muiSwitchBase,
-        'muiTab,
-        'muiTable,
-        'muiTableCell,
-        'muiTablePagination,
-        'muiTableRow,
-        'muiTableSortLabel,
-        'muiTabs,
-        'muiToolbar,
-        'muiTooltip,
-        'muiTouchRipple,
-        'muiTypography,
-      ),
-    [@bs.optional] [@bs.as "shadows"]
+    props: ComponentsProps.t,
+    [@bs.as "shadows"]
     shadows: array(string),
-    [@bs.optional] [@bs.as "shape"]
+    [@bs.as "shape"]
     shape: Shape.t,
-    [@bs.optional] [@bs.as "spacing"]
+    [@bs.as "spacing"]
     spacing: Spacing.t,
-    [@bs.optional] [@bs.as "transitions"]
-    transitions: TransitionsOptions.t('create, 'getAutoHeightDuration),
-    [@bs.optional] [@bs.as "typography"]
-    typography:
-      Typography.t(
-        'body2,
-        'button,
-        'caption,
-        'display1,
-        'display2,
-        'display3,
-        'display4,
-        'h1,
-        'h2,
-        'h3,
-        'h4,
-        'h5,
-        'h6,
-        'headline,
-        'overline,
-        'subheading,
-        'subtitle1,
-        'subtitle2,
-        'title,
-      ),
-    [@bs.optional] [@bs.as "zIndex"]
+    [@bs.as "transitions"]
+    transitions: Transitions.t,
+    [@bs.as "typography"]
+    typography: Typography.t,
+    [@bs.as "zIndex"]
     zIndex: ZIndex.t,
   };
 
   let make = t;
 };
-
-type t('p) =
-  ThemeOptions.t(
-    'between,
-    'down,
-    'only,
-    'up,
-    'width,
-    'gutters,
-    'getContrastText,
-    'muiAppBar,
-    'muiAvatar,
-    'muiBackdrop,
-    'muiBadge,
-    'muiBottomNavigation,
-    'muiBottomNavigationAction,
-    'muiButton,
-    'muiButtonBase,
-    'muiCard,
-    'muiCardActions,
-    'muiCardContent,
-    'muiCardHeader,
-    'muiCardMedia,
-    'muiCheckbox,
-    'muiChip,
-    'muiCircularProgress,
-    'muiCollapse,
-    'muiCssBaseline,
-    'muiDialog,
-    'muiDialogActions,
-    'muiDialogContent,
-    'muiDialogContentText,
-    'muiDialogTitle,
-    'muiDivider,
-    'muiDrawer,
-    'muiExpansionPanel,
-    'muiExpansionPanelActions,
-    'muiExpansionPanelDetails,
-    'muiExpansionPanelSummary,
-    'muiFormControl,
-    'muiFormControlLabel,
-    'muiFormGroup,
-    'muiFormHelperText,
-    'muiFormLabel,
-    'muiGrid,
-    'muiGridList,
-    'muiGridListTile,
-    'muiGridListTileBar,
-    'muiIcon,
-    'muiIconButton,
-    'muiInput,
-    'muiInputAdornment,
-    'muiInputLabel,
-    'muiLinearProgress,
-    'muiList,
-    'muiListItem,
-    'muiListItemAvatar,
-    'muiListItemIcon,
-    'muiListItemSecondaryAction,
-    'muiListItemText,
-    'muiListSubheader,
-    'muiMenu,
-    'muiMenuItem,
-    'muiMobileStepper,
-    'muiModal,
-    'muiNativeSelect,
-    'muiPaper,
-    'muiPopover,
-    'muiRadio,
-    'muiSelect,
-    'muiSnackbar,
-    'muiSnackbarContent,
-    'muiStep,
-    'muiStepButton,
-    'muiStepConnector,
-    'muiStepContent,
-    'muiStepIcon,
-    'muiStepLabel,
-    'muiStepper,
-    'muiSvgIcon,
-    'muiSwitch,
-    'muiSwitchBase,
-    'muiTab,
-    'muiTable,
-    'muiTableCell,
-    'muiTablePagination,
-    'muiTableRow,
-    'muiTableSortLabel,
-    'muiTabs,
-    'muiToolbar,
-    'muiTooltip,
-    'muiTouchRipple,
-    'muiTypography,
-    'create,
-    'getAutoHeightDuration,
-    'body2,
-    'button,
-    'caption,
-    'display1,
-    'display2,
-    'display3,
-    'display4,
-    'h1,
-    'h2,
-    'h3,
-    'h4,
-    'h5,
-    'h6,
-    'headline,
-    'overline,
-    'subheading,
-    'subtitle1,
-    'subtitle2,
-    'title,
-  )
-constraint 'p = (
-  'between,
-  'down,
-  'only,
-  'up,
-  'width,
-  'gutters,
-  'getContrastText,
-  'muiAppBar,
-  'muiAvatar,
-  'muiBackdrop,
-  'muiBadge,
-  'muiBottomNavigation,
-  'muiBottomNavigationAction,
-  'muiButton,
-  'muiButtonBase,
-  'muiCard,
-  'muiCardActions,
-  'muiCardContent,
-  'muiCardHeader,
-  'muiCardMedia,
-  'muiCheckbox,
-  'muiChip,
-  'muiCircularProgress,
-  'muiCollapse,
-  'muiCssBaseline,
-  'muiDialog,
-  'muiDialogActions,
-  'muiDialogContent,
-  'muiDialogContentText,
-  'muiDialogTitle,
-  'muiDivider,
-  'muiDrawer,
-  'muiExpansionPanel,
-  'muiExpansionPanelActions,
-  'muiExpansionPanelDetails,
-  'muiExpansionPanelSummary,
-  'muiFormControl,
-  'muiFormControlLabel,
-  'muiFormGroup,
-  'muiFormHelperText,
-  'muiFormLabel,
-  'muiGrid,
-  'muiGridList,
-  'muiGridListTile,
-  'muiGridListTileBar,
-  'muiIcon,
-  'muiIconButton,
-  'muiInput,
-  'muiInputAdornment,
-  'muiInputLabel,
-  'muiLinearProgress,
-  'muiList,
-  'muiListItem,
-  'muiListItemAvatar,
-  'muiListItemIcon,
-  'muiListItemSecondaryAction,
-  'muiListItemText,
-  'muiListSubheader,
-  'muiMenu,
-  'muiMenuItem,
-  'muiMobileStepper,
-  'muiModal,
-  'muiNativeSelect,
-  'muiPaper,
-  'muiPopover,
-  'muiRadio,
-  'muiSelect,
-  'muiSnackbar,
-  'muiSnackbarContent,
-  'muiStep,
-  'muiStepButton,
-  'muiStepConnector,
-  'muiStepContent,
-  'muiStepIcon,
-  'muiStepLabel,
-  'muiStepper,
-  'muiSvgIcon,
-  'muiSwitch,
-  'muiSwitchBase,
-  'muiTab,
-  'muiTable,
-  'muiTableCell,
-  'muiTablePagination,
-  'muiTableRow,
-  'muiTableSortLabel,
-  'muiTabs,
-  'muiToolbar,
-  'muiTooltip,
-  'muiTouchRipple,
-  'muiTypography,
-  'create,
-  'getAutoHeightDuration,
-  'body2,
-  'button,
-  'caption,
-  'display1,
-  'display2,
-  'display3,
-  'display4,
-  'h1,
-  'h2,
-  'h3,
-  'h4,
-  'h5,
-  'h6,
-  'headline,
-  'overline,
-  'subheading,
-  'subtitle1,
-  'subtitle2,
-  'title,
-);
-let make = ThemeOptions.make;
-
-let primary = Primary.make(~main="#000", ());
-let palette: PaletteOptions.t(string) = PaletteOptions.make(~primary, ());
-let theme: t(_) = make(~palette, ());
+type t = Theme.t;
+let make = Theme.make;

@@ -5,7 +5,7 @@ import Converter from '../src_ts/index';
 const res = Converter(JSON.stringify(json), 'Theme', {
     replaceRefs: [
         {
-            re: /CSSProperties/m,
+            re: /CSSProperties$/m,
             replaceWith: 'ReactDOMRe.Style.t',
         },
         {

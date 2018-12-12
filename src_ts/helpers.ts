@@ -16,6 +16,8 @@ export const generateModuleName = (name: string) => {
 export const generateAttributeName = (name: string) => {
     name = uncapitalize(name);
 
+    name = name.replace(/-(.{1})/g, (g) => g[1].toUpperCase());
+
     const firstLetter = name.substr(0, 1);
     if (firstLetter === firstLetter.toUpperCase()) {
         name = `_${name}`;
