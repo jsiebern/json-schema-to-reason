@@ -1,6 +1,6 @@
 {
   "name": "@jsiebern/json-schema-to-reason",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "./dist/src_ts/index.js",
   "types": "./index.d.ts",
   "repository": "https://github.com/jsiebern/json-schema-to-reason.git",
